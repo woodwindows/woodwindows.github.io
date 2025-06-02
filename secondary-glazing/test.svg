@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1850" height="1565" viewBox="-100 -100 1850 1565" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .run {
+      fill: white;
+      stroke: black;
+      stroke-width: 1;
+    }
+    .opening {
+      stroke: black;
+    }
+    .glass {
+      stroke: grey;
+    }
+
+    #primary .opening {
+      stroke: grey;
+    }
+
+    #primary .glass {
+      stroke: gray;
+    }
+
+    #secondary .opening {
+      stroke-width: 3;
+    }
+
+    #secondary .glass {
+      fill: rgba(105, 103, 236, 0.75);
+    }
+</style>
+<rect x="-1000" y="-1000" width="10000" height="10000" class="background" />
+<g id="secondary">
+<rect x="0" y="0" width="1650" height="1365" class="run" />
+<rect x="28" y="20.5" width="474" height="1324" class="opening" />
+<rect x="75" y="67.5" width="380" height="1230" class="glass" />
+<rect x="588" y="20.5" width="474" height="1324" class="opening" />
+<rect x="635" y="67.5" width="380" height="1230" class="glass" />
+<rect x="1148" y="20.5" width="474" height="1324" class="opening" />
+<rect x="1195" y="67.5" width="380" height="1230" class="glass" />
+</g>
+<g id="primary">
+<rect x="45" y="-1000" width="410" height="4000" class="opening" />
+<rect x="75" y="-100" width="350" height="4000" class="glass" />
+<rect x="620" y="-1000" width="410" height="4000" class="opening" />
+<rect x="650" y="-100" width="350" height="4000" class="glass" />
+<rect x="1195" y="-1000" width="410" height="4000" class="opening" />
+<rect x="1225" y="-100" width="350" height="4000" class="glass" />
+</g>
+</svg>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mullioned Windows - Secondary Glazing</title>
+    <style>
+        .tip {
+            color: lightgray;
+        }
+        .count {
+            font-weight: bold;
+        }
+        .openings {
+            font-weight: bold;
+        }
+    </style>
+    <script type="module">
+        import { MullionedWindows } from "./mullioned-windows.js";
+        const w = new MullionedWindows();
+        console.log(w.measured);
+        console.log(w.measured.openings);
+    </script>
+</head>
+
+<body>
+    <h1>Secondary Glazing for Mullioned Windows</h1>
+    <p>This page will guide you through building secondary glazing for mullioned casement windows using <a
+            href="https://www.thewoodhaven2.co.uk/threads/secondary-glazing.10564/">@Windows</a>' design.</p>
+    <h2>Measurements</h2>
+    <p>Please provide, in mm, the following measurements from the existing external windows</p>
+    <div>
+        <div>Width (reveal): <input id="measure-width" type="number"></div>
+        <div class="tip">The width of the entire space in which the secondary glazing can be placed</div>
+    </div>
+    <div>
+        <div>Height (reveal): <input id="measure-height" type="number"></div>
+        <div class="tip">The height of the entire space in which the secondary glazing can be placed</div>
+    </div>
+    
+    <div>
+        <div>Opening width (left casement): <input id="measure-opening-width" type="number"></div>
+        <div class="tip">The width of the opening for a single casement</div>
+    </div>
+    
+    <div>
+        <div>Frame thickness (left): <input id="measure-frame-thickness" type="number"></div>
+        <div class="tip">The distance from the left of the window reveal to the left of the first opening</div>
+    </div>
+    
+    <div>
+        <div>Visible sash thickness (left): <input id="measure-visible-sash-thickness" type="number"></div>
+        <div class="tip">The distance from the left of the first opening to the left side of the first glass</div>
+    </div>
+
+    <p>We assume that your existing windows are symmetrical across the run of casements and within each casement.</p>
+    <div><button id="calculate" type="button">Calculate</button></div>
+
+    <h2>Existing Windows</h2>
+    <p>Your existing windows have <span id="primary-casement-count" class="count"></span> casements with openings at the following locations:</p>
+    <p><span id="primary-openings" class="openings"></span></p>
+    <p>We recommend that you check the locations of the openings and if more than a mm or two out, check the original measurements you provided and correct as necessary.</p>
+    <p>If you find that the locations are significantly out, you may not have a symmetrical set of existing windows and you might consider whether a symmetrical set of internal glazing will work for your particular situation. This tool can only produce measurements for symmetrical internal glazing.</p>
+
+    <h2>Secondary Glazing</h2>
+    <p>There will be 1 casement in the secondary glazing for each casement in the primary glazing.</p>
+    <p>All secondary casements will be the same size and arranged symmetrically.</p>
+    <p>We align the edge of the secondary glazing's glass to either the edge of the primary window's opening or to the edge of the primary window's glass if our choice of materials means that we can't align to the opening.</p>
+    <p>Your secondary glazing has <span id="secondary-casement-count" class="count"></span> casements with openings at the following locations:</p>
+    <p><span id="primary-openings" class="openings"></span></p>
+    <div id="secondary-glazing-data"></div>
+</body>
+
+</html>
