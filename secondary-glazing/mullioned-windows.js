@@ -1,5 +1,5 @@
 
-class ExteriorWindows {
+export class ExteriorWindows {
     /**
      * The total height of the window reveal in which the secondary glazing can be placed
      * @type int */
@@ -141,7 +141,7 @@ class ExteriorWindows {
  * Defines secondary glazing for a set of casements with mullions between.
  * The secondary glazing has a liner, casements, stops, and a flyscreen.
  */
-class MullionedWindows {
+export class MullionedWindows {
     measured = new ExteriorWindows();
 
     /**
