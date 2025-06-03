@@ -35,7 +35,10 @@
 
         function calculate() {
             const dataElement = document.querySelector(`#secondary-glazing-data`);
-            dataElement.innerText = w.toString(); 
+            dataElement.innerText = w.toString();
+
+            const imageContainerElement = document.querySelector(`#secondary-glazing-image`);
+            imageContainerElement.innerHTML = w.drawX();
         }
 
         calculate();
@@ -88,6 +91,7 @@
     <p>We align the edge of the secondary glazing's glass to either the edge of the primary window's opening or to the edge of the primary window's glass if our choice of materials means that we can't align to the opening.</p>
     <p>Your secondary glazing has <span id="secondary-casement-count" class="count"></span> casements with openings at the following locations:</p>
     <p><span id="primary-openings" class="openings"></span></p>
+    <div id="secondary-glazing-image"></div>
     <div id="secondary-glazing-data"></div>
 </body>
 
