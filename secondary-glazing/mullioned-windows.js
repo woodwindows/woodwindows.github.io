@@ -479,7 +479,8 @@ export class MullionedWindows {
         const boxHeight = this.measured.height + 2 * boxMargin;
         const boxWidth = this.measured.width + 2 * boxMargin;
 
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="${boxWidth}" height="${boxHeight}" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+        // width="${boxWidth}" height="${boxHeight}" 
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
     .run {
