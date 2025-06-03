@@ -28,6 +28,13 @@
             const id = "measured-" + property;
             document.querySelector(`#${id}`).value = value;
         }
+
+        function calculate() {
+            const dataElement = document.querySelector(`#secondary-glazing-data`);
+            dataElement.innerText = w.toString(); 
+        }
+
+        calculate();
     </script>
 </head>
 
