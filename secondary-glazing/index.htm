@@ -39,7 +39,7 @@
             pcc.innerText = w.measured.casementCount;
 
             const po = document.querySelector("#primary-openings");
-            pcc.innerText = w.measured.openings.map(o => o.join(", ")).join("; ");
+            po.innerText = w.measured.openings.map(o => o.join(", ")).join("; ");
 
             const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
             for (const property of properties) {
