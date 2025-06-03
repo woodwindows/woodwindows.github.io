@@ -133,7 +133,7 @@ export class ExteriorWindows {
             const o = casement.opening;
             const g = casement.glass;
             yield `<rect x="${o.x}" y="-1000" width="${o.width}" height="4000" class="opening" />`;
-            yield `<rect x="${g.x}" y="-100" width="${g.width}" height="4000" class="glass" />`;
+            yield `<rect x="${g.x}" y="-1000" width="${g.width}" height="4000" class="glass" />`;
         }
     }
 }
