@@ -3,12 +3,12 @@ export class ExteriorWindows {
     /**
      * The total height of the window reveal in which the secondary glazing can be placed
      * @type int */
-    width = 890;
+    width = 1065;
 
     /**
      * The total width of the window reveal in which the secondary glazing can be placed
      * @type int */
-    height = 1350;
+    height = 1365;
 
     /**
      * The measured width of a single external window opening

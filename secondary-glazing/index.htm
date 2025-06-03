@@ -21,6 +21,13 @@
         const w = new MullionedWindows();
         console.log(w.measured);
         console.log(w.measured.openings);
+
+        const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
+        for (const property of properties) {
+            const value = w.measured[property];
+            const id = "measured-" + property;
+            document.querySelector(`#${id}`).value = value;
+        }
     </script>
 </head>
 
@@ -31,27 +38,27 @@
     <h2>Measurements</h2>
     <p>Please provide, in mm, the following measurements from the existing external windows</p>
     <div>
-        <div>Height (reveal): <input id="measure-height" type="number"></div>
+        <div>Height (reveal): <input id="measured-height" type="number"></div>
         <div class="tip">The height of the entire space in which the secondary glazing can be placed</div>
     </div>
-    
+
     <div>
-        <div>Width (reveal): <input id="measure-width" type="number"></div>
+        <div>Width (reveal): <input id="measured-width" type="number"></div>
         <div class="tip">The width of the entire space in which the secondary glazing can be placed</div>
     </div>
     
     <div>
-        <div>Opening width (left casement): <input id="measure-opening-width" type="number"></div>
+        <div>Opening width (left casement): <input id="measured-openingWidth" type="number"></div>
         <div class="tip">The width of the opening for a single casement</div>
     </div>
     
     <div>
-        <div>Frame thickness (left): <input id="measure-frame-thickness" type="number"></div>
+        <div>Frame thickness (left): <input id="measured-frameThickness" type="number"></div>
         <div class="tip">The distance from the left of the window reveal to the left of the first opening</div>
     </div>
     
     <div>
-        <div>Visible sash thickness (left): <input id="measure-visible-sash-thickness" type="number"></div>
+        <div>Visible sash thickness (left): <input id="measured-visibleSashThickness" type="number"></div>
         <div class="tip">The distance from the left of the first opening to the left side of the first glass</div>
     </div>
 

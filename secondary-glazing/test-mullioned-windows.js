@@ -4,8 +4,8 @@ Deno.test("shower-room", () => {
     const w = new MullionedWindows();
     // w.hingeInset = 400;
 
-    // w.measured.width = 1065; // shower
-    w.measured.width = 1650; // bedroom
+    w.measured.width = 1065; // shower
+    // w.measured.width = 1650; // bedroom
     w.measured.height = 1365;
     w.measured.frameThickness = 45;
     w.measured.visibleSashThickness = 30;
