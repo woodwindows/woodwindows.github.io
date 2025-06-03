@@ -37,7 +37,7 @@
             const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
             for (const property of properties) {
                 const id = "measured-" + property;
-                const value = document.querySelector(`#${id}`).value;
+                const value = parseFloat(document.querySelector(`#${id}`).value);
                 w.measured[property] = value;
             }
             
