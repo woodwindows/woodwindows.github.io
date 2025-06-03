@@ -16,6 +16,10 @@
             font-weight: bold;
         }
 
+        #primary-openings {
+            white-space: pre-wrap;
+        }
+
         #secondary-glazing-data {
             white-space: pre-wrap;
         }
@@ -39,7 +43,7 @@
             pcc.innerText = w.measured.casementCount;
 
             const po = document.querySelector("#primary-openings");
-            po.innerText = w.measured.openings.map(o => o.join(", ")).join("; ");
+            po.innerText = w.measured.openings.map(o => o.join(" --> ")).join("\n");
 
             const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
             for (const property of properties) {
@@ -101,7 +105,7 @@
 
     <h2>Existing Windows</h2>
     <p>Your existing windows have <span id="primary-casement-count" class="count"></span> casements with openings at the following locations:</p>
-    <p><span id="primary-openings" class="openings"></span></p>
+    <div id="primary-openings" class="openings"></div>
     <p>We recommend that you check the locations of the openings and if more than a mm or two out, check the original measurements you provided and correct as necessary.</p>
     <p>If you find that the locations are significantly out, you may not have a symmetrical set of existing windows and you might consider whether a symmetrical set of internal glazing will work for your particular situation. This tool can only produce measurements for symmetrical internal glazing.</p>
 
