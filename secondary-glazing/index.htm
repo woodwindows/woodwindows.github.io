@@ -34,6 +34,9 @@
         }
 
         function calculate() {
+            w.endMullionWidth = w.calculateOpeningLeft();
+            w.casementWidth = w.calculateOpeningWidth();
+
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
 
