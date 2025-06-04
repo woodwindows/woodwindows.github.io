@@ -62,8 +62,11 @@
             imageContainerElement.innerHTML = w.drawX();
         }
 
-        const calculateButton = document.querySelector("#calculate");
-        calculateButton.onclick = () => calculate();
+        // const calculateButton = document.querySelector("#calculate");
+        // calculateButton.onclick = () => calculate();
+
+        const measurementsElement = document.querySelector("#measurements");
+        measurementsElement.addEventListener("change", () => calculate());
 
         calculate();
     </script>
@@ -76,6 +79,7 @@
     <p>THIS PAGE IS UNTESTED SOFTWARE. USE AT YOUR OWN RISK.</p>
     <h2>Measurements</h2>
     <p>Please provide, in mm, the following measurements from the existing external windows</p>
+    <div id="measurements">
     <div>
         <div>Height (reveal): <input id="measured-height" type="number"></div>
         <div class="tip">The height of the entire space in which the secondary glazing can be placed</div>
@@ -100,9 +104,10 @@
         <div>Visible sash thickness (left): <input id="measured-visibleSashThickness" type="number"></div>
         <div class="tip">The distance from the left of the first opening to the left side of the first glass</div>
     </div>
+    </div>
 
     <p>We assume that your existing windows are symmetrical across the run of casements and within each casement.</p>
-    <div><button id="calculate" type="button">Calculate</button></div>
+    <!-- <div><button id="calculate" type="button">Calculate</button></div> -->
 
     <h2>Existing Windows</h2>
     <p>Your existing windows have <span id="primary-casement-count" class="count"></span> casements with openings at the following locations:</p>
