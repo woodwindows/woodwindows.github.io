@@ -145,9 +145,9 @@ export class MullionedWindows {
     measured = new ExteriorWindows();
 
     /**
-     * The extra width at the start and stop of the run of casements - like a mullion at each end
+     * The width of the jamb - a vertical piece at the start and stop of a run of casements
      * @type int */
-    endMullionWidth = 0;
+    jambWidth = 0;
 
     /**
      * The width in which one casement must fit - the opening width
@@ -356,49 +356,46 @@ export class MullionedWindows {
         return this.sashHeight - (2 * (this.hingeInset + this.materialHingeHeight));
     }
 
-    /** What the end mullion width would need to be to align the left edge of the interior glass with the exterior opening */
-    get endMullionWidthOpeningAligned() {
+    /** What the jamb width would need to be to align the left edge of the interior glass with the exterior opening */
+    get jambWidthOpeningAligned() {
         return this.measured.openingLeft - (this.gap + this.materialSashThickness);
     }
 
-    /** What the end mullion width would need to be to align the left edge of the interior glass with the exterior glass */
-    get endMullionWidthGlassAligned() {
+    /** What the jamb width would need to be to align the left edge of the interior glass with the exterior glass */
+    get jambWidthGlassAligned() {
         return this.measured.glassVisibleLeft - (this.gap + this.materialSashThickness);
     }
 
     /** What the casement width would need to be to align the center of the casement with the center of the exterior opening */
     get casementWidthCentered() {
-        return 2 * (this.measured.frameThickness - this.workingEndMullionWidth) + this.measured.openingWidth;
+        return 2 * (this.measured.frameThickness - this.workingJambWidth) + this.measured.openingWidth;
     }
 
     /** What the casement width would need to be to align the right of the interior glass with the right of the exterior opening */
     get casementWidthOpeningAligned() {
-        // const rightInteriorGlass = this.workingEndMullionWidth + CASEMENTWIDTH - (this.materialSashThickness + this.gap);
-        return this.measured.openingRight - this.workingEndMullionWidth + (this.materialSashThickness + this.gap);
+        // const rightInteriorGlass = this.workingJambWidth + CASEMENTWIDTH - (this.materialSashThickness + this.gap);
+        return this.measured.openingRight - this.workingJambWidth + (this.materialSashThickness + this.gap);
     }
 
     /** What the casement width would need to be to align the right of the interior glass with the right of the exterior glass */
     get casementWidthGlassAligned() {
-        // const rightInteriorGlass = this.workingEndMullionWidth + CASEMENTWIDTH - (this.materialSashThickness + this.gap);
-        return this.measured.glassVisibleRight - this.workingEndMullionWidth + (this.materialSashThickness + this.gap);
+        // const rightInteriorGlass = this.workingJambWidth + CASEMENTWIDTH - (this.materialSashThickness + this.gap);
+        return this.measured.glassVisibleRight - this.workingJambWidth + (this.materialSashThickness + this.gap);
     }
 
-    /** Does the run have true end mullions needing a face piece? */
-    get hasEndMullions() {
-        // end mullions cannot be less than the material liner thickness
-        return (this.endMullionWidth > this.materialLinerThickness);
+    /** Is the jamb wide enough to need a face piece? */
+    get hasJambFace() {
+        // jambs cannot be less than the material liner thickness
+        return (this.jambWidth > this.materialLinerThickness);
     }
 
-    /** The useful width of the end mullions must be at least the material liner thickness */
-    get workingEndMullionWidth() {
-        return this.hasEndMullions ? this.endMullionWidth : this.materialLinerThickness;
+    /** The useful width of the jamb must be at least the material liner thickness */
+    get workingJambWidth() {
+        return this.hasJambFace ? this.jambWidth : this.materialLinerThickness;
     }
 
     get casementCount() {
         return this.measured.casementCount;
-        // const allItems = this.measured.width - (2 * this.workingEndMullionWidth) + (2 * this.materialLinerThickness);
-        // const oneItem = this.materialLinerThickness + this.casementWidth + this.materialLinerThickness;
-        // return Math.floor(allItems / oneItem);
     }
 
     get mullionCount() {
@@ -408,7 +405,7 @@ export class MullionedWindows {
     get mullionWidth() {
         if (this.mullionCount === 0) { return 0; }
 
-        return ((this.measured.width - (2 * this.workingEndMullionWidth)) - (this.casementWidth * this.casementCount)) / this.mullionCount;
+        return ((this.measured.width - (2 * this.workingJambWidth)) - (this.casementWidth * this.casementCount)) / this.mullionCount;
     }
 
     /** Does the run have true mullions needing a face piece? */
@@ -418,8 +415,6 @@ export class MullionedWindows {
     }
 
     get openingWidth() {
-        //return this.casementWidth - (2 * this.materialLinerThickness);
-        // casement width and opening width are the same - supports are taken from the mullion or end mullion width
         return this.casementWidth;
     }
 
@@ -433,7 +428,7 @@ export class MullionedWindows {
     }
 
     get openingLeft() {
-        return this.workingEndMullionWidth;
+        return this.workingJambWidth;
     }
 
     get openingRight() {
@@ -630,10 +625,10 @@ ${[...this.measured.drawLines()].join("\n")}
         const count = 2 * casementCount;
         const screenedCasementCount = 2 * casementCount; // Don't use openingCasementCount here because there is no seal between secondary casements in our design
 
-        const endMullions = this.hasEndMullions ? [{ count: 2, name: "end-mullion", dimensions: [this.materialLinerThickness, this.endMullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
+        const jambs = this.hasJambFace ? [{ count: 2, name: "jamb", dimensions: [this.materialLinerThickness, this.jambWidth, this.measured.height - this.materialLinerThickness] }] : [];
         const mullions = this.hasMullions ? [{ count: this.mullionCount, name: "mullion", dimensions: [this.materialLinerThickness, this.mullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
 
-        const linersVertical = (this.hasEndMullions == this.hasMullions) ? [
+        const linersVertical = (this.hasJambFace == this.hasMullions) ? [
             {
                 count,
                 name: "liner-vertical",
@@ -644,8 +639,8 @@ ${[...this.measured.drawLines()].join("\n")}
             {
                 count: 2,
                 name: "liner-vertical-end",
-                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasEndMullions ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
-                notes: (this.hasEndMullions) ? `Sized to allow the mullion faces` : ``
+                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasJambFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
+                notes: (this.hasJambFace) ? `Sized to allow the mullion faces` : ``
             },
             {
                 count: count - 2,
@@ -660,10 +655,10 @@ ${[...this.measured.drawLines()].join("\n")}
                 count: 2,
                 name: "liner-horizontal",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth, this.measured.width],
-                notes: (this.hasEndMullions || this.hasMullions) ? `Cut recesses for the mullion faces` : ``
+                notes: (this.hasJambFace || this.hasMullions) ? `Cut recesses for the mullion faces` : ``
             },
             ...linersVertical,
-            ...endMullions,
+            ...jambs,
             ...mullions,
             { count, name: "sash-horizontal", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth] },
             { count, name: "sash-vertical", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight] },
@@ -697,27 +692,27 @@ ${[...this.measured.drawLines()].join("\n")}
     }
 
     * _pathLinerHorizontal() {
-        const rightMullion = this.hasEndMullions ? [
+        const rightJamb = this.hasJambFace ? [
             `v ${this.materialLinerThickness}`,
-            `h -${this.endMullionWidth - this.materialLinerThickness}`,
+            `h -${this.jambWidth - this.materialLinerThickness}`,
             `v -${this.materialLinerThickness / 2}`,
         ] : [`v ${this.materialLinerThickness / 2}`];
 
-        const leftMullion = this.hasEndMullions ? [
+        const leftJamb = this.hasJambFace ? [
             `v ${this.materialLinerThickness / 2}`,
-            `h -${this.endMullionWidth - this.materialLinerThickness}`,
+            `h -${this.jambWidth - this.materialLinerThickness}`,
             `v -${this.materialLinerThickness}`,
         ] : [`v -${this.materialLinerThickness / 2}`];
 
         const commands = [
             `h ${this.measured.width}`,
-            ...rightMullion,
+            ...rightJamb,
             `h -${this.materialLinerThickness}`,
             `v ${this.materialLinerThickness / 2}`,
             ...this._plhBase(),
             `v -${this.materialLinerThickness / 2}`,
             `h -${this.materialLinerThickness}`,
-            ...leftMullion,
+            ...leftJamb,
             "z",
         ];
         yield* commands;
@@ -875,20 +870,6 @@ ${[...this.measured.drawLines()].join("\n")}
             list.push(`${this.openingRightImpingement} mm of opening hidden on the right`);
         }
 
-        // const openingImpingement = this.endMullionWidth + this.gap + this.materialSashThickness - this.measured.frameThickness;
-        // const glassImpingement = this.endMullionWidth + this.gap + this.materialSashThickness - (this.measured.frameThickness + this.measured.visibleSashThickness);
-        // if (openingImpingement > 0) {
-        //     list.push(`The secondary glazing impinges on the left of the external window opening by ${openingImpingement} mm`);
-        //     if (glassImpingement == 0) {
-        //         list.push(`The secondary glazing is left-aligned on the glass area`);
-        //     } else if (glassImpingement < 0) {
-        //         list.push(`The secondary glazing does not impinge on the left of the external window glass area`);
-        //     }
-        // }
-        // if (glassImpingement > 0) {
-        //     list.push(`The secondary glazing impinges on the left of the external window glass area by ${glassImpingement} mm`);
-        // }
-
         if (this.materialGlassThickness > 6) {
             list.push(`I hope your glass is double glazing. ${this.materialGlassThickness} mm is thick for single glazing.`);
         }
@@ -902,8 +883,8 @@ ${[...this.measured.drawLines()].join("\n")}
         if (this.mullionWidth > this.materialLinerDepth) {
             list.push(`The mullion width is greater than the liner material. (${this.mullionWidth} > ${this.materialLinerDepth})`);
         }
-        if (this.endMullionWidth > this.materialLinerDepth) {
-            list.push(`The end mullion width is greater than the liner material`);
+        if (this.jambWidth > this.materialLinerDepth) {
+            list.push(`The jamb width is greater than the liner material`);
         }
         if (this.glassGap > 5) {
             list.push(`The glass gap is large. Are you sure you want to leave ${this.glassGap} mm around the glass? 3mm is typical.`);
