@@ -60,10 +60,10 @@ export class ExteriorWindows {
         return this.openingLeft;
     }
 
-    /** The position of the right side of the first unit - includes half the mullion
+    /** The position of the right side of the first unit - includes half the mullion if there is one or the frame thickness otherwise.
      * @type int */
     get unitRight() {
-        return this.openingRight + this.mullionWidth/2;
+        return this.openingRight + (this.mullionWidth/2 || this.frameThickness);
     }
 
     /** The number of casements in the run
