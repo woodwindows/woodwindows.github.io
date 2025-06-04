@@ -38,22 +38,23 @@
         }
 
         function calculate() {
-
-            const pcc = document.querySelector("#primary-casement-count");
-            pcc.innerText = w.measured.casementCount;
-
-            const po = document.querySelector("#primary-openings");
-            po.innerText = w.measured.openings.map(o => o.join(" mm ↦ ") + " mm").join("\n");
-
+            // Set the measured properties from the values set by the user
             const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
             for (const property of properties) {
                 const id = "measured-" + property;
                 const value = parseFloat(document.querySelector(`#${id}`).value);
                 w.measured[property] = value;
             }
-            
+
+            // Recalculate the secondary glazing layout
             w.endMullionWidth = w.calculateOpeningLeft();
             w.casementWidth = w.calculateOpeningWidth();
+
+            const pcc = document.querySelector("#primary-casement-count");
+            pcc.innerText = w.measured.casementCount;
+
+            const po = document.querySelector("#primary-openings");
+            po.innerText = w.measured.openings.map(o => o.join(" mm ↦ ") + " mm").join("\n");
 
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
