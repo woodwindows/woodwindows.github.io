@@ -856,7 +856,7 @@ ${[...this.measured.drawLines()].join("\n")}
         const list = [];
 
         if (this.openingArea < 0.33 || this.openingWidth < 450 || this.openingHeight < 450) {
-            list.push(`Caution if these are egress windows. The area or minimum dimensions are too small.`);
+            list.push(`EGRESS WARNING: The area, width, or height of each secondary glazing opening is too small for an egress window.`);
         }
 
         if (this.glassLeftImpingement > 0) {
