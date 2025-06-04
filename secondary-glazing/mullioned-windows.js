@@ -71,7 +71,7 @@ export class ExteriorWindows {
     get casementCount() {
         const allItems = this.width - (2 * this.openingLeft);
         const oneItem = this.openingWidth;
-        return Math.floor(allItems / oneItem);
+        return Math.max(Math.floor(allItems / oneItem), 1);
     }
 
     /** The number of mullions in the run
