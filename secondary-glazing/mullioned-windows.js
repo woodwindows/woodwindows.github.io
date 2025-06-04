@@ -409,7 +409,7 @@ export class MullionedWindows {
     }
 
     /** Does the run have true mullions needing a face piece? */
-    get hasMullions() {
+    get hasMullionFace() {
         // mullions cannot be less than twice the material liner thickness
         return (this.mullionWidth > 2 * this.materialLinerThickness);
     }
@@ -626,27 +626,27 @@ ${[...this.measured.drawLines()].join("\n")}
         const screenedCasementCount = 2 * casementCount; // Don't use openingCasementCount here because there is no seal between secondary casements in our design
 
         const jambs = this.hasJambFace ? [{ count: 2, name: "jamb", dimensions: [this.materialLinerThickness, this.jambWidth, this.measured.height - this.materialLinerThickness] }] : [];
-        const mullions = this.hasMullions ? [{ count: this.mullionCount, name: "mullion", dimensions: [this.materialLinerThickness, this.mullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
+        const mullions = this.hasMullionFace ? [{ count: this.mullionCount, name: "mullion", dimensions: [this.materialLinerThickness, this.mullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
 
-        const linersVertical = (this.hasJambFace == this.hasMullions) ? [
+        const linersVertical = (this.hasJambFace == this.hasMullionFace) ? [
             {
                 count,
                 name: "liner-vertical",
-                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullions ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
-                notes: (this.hasMullions) ? `Sized to allow the mullion faces` : ``
+                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullionFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
+                notes: (this.hasMullionFace) ? `Sized to allow the mullion & jamb faces` : ``
             },
         ] : [
             {
                 count: 2,
                 name: "liner-vertical-end",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasJambFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
-                notes: (this.hasJambFace) ? `Sized to allow the mullion faces` : ``
+                notes: (this.hasJambFace) ? `Sized to allow the jamb faces` : ``
             },
             {
                 count: count - 2,
                 name: "liner-vertical-interior",
-                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullions ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
-                notes: (this.hasMullions) ? `Sized to allow the mullion faces` : ``
+                dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullionFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
+                notes: (this.hasMullionFace) ? `Sized to allow the mullion faces` : ``
             },
         ];
 
@@ -655,7 +655,7 @@ ${[...this.measured.drawLines()].join("\n")}
                 count: 2,
                 name: "liner-horizontal",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth, this.measured.width],
-                notes: (this.hasJambFace || this.hasMullions) ? `Cut recesses for the mullion faces` : ``
+                notes: (this.hasJambFace || this.hasMullionFace) ? `Cut recesses for the mullion or jamb faces` : ``
             },
             ...linersVertical,
             ...jambs,
