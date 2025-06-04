@@ -863,7 +863,7 @@ ${[...this.measured.drawLines()].join("\n")}
         }
 
         if (this.openingRightImpingement > 0) {
-            list.push(`${this.glassRightImpingement} mm of opening hidden on the right`);
+            list.push(`${this.openingRightImpingement} mm of opening hidden on the right`);
         }
 
         // const openingImpingement = this.endMullionWidth + this.gap + this.materialSashThickness - this.measured.frameThickness;
