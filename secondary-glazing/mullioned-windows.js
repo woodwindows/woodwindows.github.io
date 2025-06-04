@@ -427,6 +427,11 @@ export class MullionedWindows {
         return this.measured.height - (2 * this.materialLinerThickness);
     }
 
+    /** Opening area in m2 */
+    get openingArea() {
+        return (this.openingHeight/1000) * (this.openingWidth/1000);
+    }
+
     get openingLeft() {
         return this.workingEndMullionWidth;
     }
@@ -849,6 +854,10 @@ ${[...this.measured.drawLines()].join("\n")}
 
     get diagnostics() {
         const list = [];
+
+        if (this.openingArea < 0.33 || this.openingWidth < 450 || this.openingHeight < 450) {
+            list.push(`Caution if these are egress windows. The area or minimum dimensions are too small.`);
+        }
 
         if (this.glassLeftImpingement > 0) {
             list.push(`${this.glassLeftImpingement} mm of glass hidden on the left`);
