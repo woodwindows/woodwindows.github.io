@@ -77,7 +77,7 @@ export class ExteriorWindows {
     /** The number of mullions in the run
      * @type int */
     get mullionCount() {
-        return this.casementCount - 1;
+        return Math.max(this.casementCount - 1, 0);
     }
 
     /** The width of the mullions (gaps between openings)
