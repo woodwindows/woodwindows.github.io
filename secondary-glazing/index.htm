@@ -56,11 +56,16 @@
             const po = document.querySelector("#primary-openings");
             po.innerText = w.measured.openings.map(o => o.join(" mm ↦ ") + " mm").join("\n");
 
+            const imageContainerElement = document.querySelector(`#secondary-glazing-image`);
+            imageContainerElement.innerHTML = w.drawX();
+
+            const partsElement = document.querySelector("#secondary-parts-list");
+            partsElement.innerHTML = w.parts.map(part => `<div class="count">${part.count}</div><div class="name">${part.name}</div><div class="dimensions">${part.dimensions.join(" x ")}</div>`).join("\n");
+
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
 
-            const imageContainerElement = document.querySelector(`#secondary-glazing-image`);
-            imageContainerElement.innerHTML = w.drawX();
+            
         }
 
         // const calculateButton = document.querySelector("#calculate");
@@ -122,6 +127,9 @@
     <p>We align the edge of the secondary glazing's glass to either the edge of the primary window's opening or to the edge of the primary window's glass if our choice of materials means that we can't align to the opening.</p>
     <p>Here's how your secondary glazing will look. The vertical lines show the positions of the openings and glass in the primary windows.</p>
     <div id="secondary-glazing-image"></div>
+    <h3>Parts List</h3>
+    <p>Here are the parts you will need for your secondary glazing:</p>
+    <div id="secondary-parts-list"></div>
     <p>Here's a dump of the data for your secondary glazing including a parts list:</p>
     <div id="secondary-glazing-data"></div>
 </body>
