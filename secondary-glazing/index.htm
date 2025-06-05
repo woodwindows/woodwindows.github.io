@@ -54,7 +54,7 @@
             pcc.innerText = w.measured.casementCount;
 
             const po = document.querySelector("#primary-openings");
-            po.innerText = w.measured.openings.map(o => o.join(" mm ↦ ") + " mm").join("\n");
+            po.innerText = w.measured.openings.map(o => (+o.toFixed(2)).join(" mm ↦ ") + " mm").join("\n");
 
             const imageContainerElement = document.querySelector(`#secondary-glazing-image`);
             imageContainerElement.innerHTML = w.drawX();
