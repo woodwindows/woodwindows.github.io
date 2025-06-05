@@ -277,7 +277,8 @@ export class MullionedWindows {
 
     /** Calculates the best location for the left of the first opening */
     calculateOpeningLeft() {
-        return this.calculateGlassVisibleLeft() - (this.gap + this.materialSashThickness);
+        // If the primary opening is less than the calculated opening, adjust it so that we don't show the secondary jamb and it's open back from outside
+        return Math.min(this.calculateGlassVisibleLeft() - (this.gap + this.materialSashThickness), this.measured.openingLeft);
     }
 
     /** Calculates the best location for the right of the first glass */
@@ -297,7 +298,8 @@ export class MullionedWindows {
 
     /** Calculates the best location for the right of the first opening */
     calculateOpeningRight() {
-        return this.calculateGlassVisibleRight() + (this.materialSashThickness + this.gap);
+        // If the primary opening is greater than the calculated opening, adjust it so that we don't show the secondary mullion and it's open back from outside
+        return Math.max(this.calculateGlassVisibleRight() + (this.materialSashThickness + this.gap), this.measured.openingRight);
     }
 
     /** Calculates the best width for the openings */
@@ -852,6 +854,14 @@ ${[...this.measured.drawLines()].join("\n")}
 
         if (this.openingArea < 0.33 || this.openingWidth < 450 || this.openingHeight < 450) {
             list.push(`EGRESS WARNING: The area, width, or height of each secondary glazing opening is too small for an egress window.`);
+        }
+
+        if (this.openingLeft > this.measured.openingLeft) {
+            list.push(`The secondary glazing opening is inside the primary opening on the left. The jamb would be visible from the outside and would need a back which isn't in the parts list.`);
+        }
+
+        if (this.openingRight < this.measured.openingRight) {
+            list.push(`The secondary glazing opening is inside the primary opening on the right. The mullion would be visible from the outside and would need a back which isn't in the parts list.`);
         }
 
         if (this.glassLeftImpingement > 0) {
