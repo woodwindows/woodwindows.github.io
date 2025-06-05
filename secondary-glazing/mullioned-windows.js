@@ -864,6 +864,10 @@ ${[...this.measured.drawLines()].join("\n")}
             list.push(`The secondary glazing opening is inside the primary opening on the right. The mullion would be visible from the outside and would need a back which isn't in the parts list.`);
         }
 
+        if (this.jambWidth < this.materialLinerThickness) {
+            list.push(`The jamb width is smaller than the liner thickness (${this.jambWidth} < ${this.materialLinerThickness})`);
+        }
+
         if (this.glassLeftImpingement > 0) {
             list.push(`${this.glassLeftImpingement} mm of glass hidden on the left`);
         }
