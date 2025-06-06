@@ -633,20 +633,20 @@ ${[...this.measured.drawLines()].join("\n")}
         const linersVertical = (this.hasJambFace == this.hasMullionFace) ? [
             {
                 count,
-                name: "liner-vertical",
+                name: "Liner (Vertical)",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullionFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
                 notes: (this.hasMullionFace) ? `Sized to allow the mullion & jamb faces` : ``
             },
         ] : [
             {
                 count: 2,
-                name: "liner-vertical-end",
+                name: "Liner (Vertical, Jamb)",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasJambFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
                 notes: (this.hasJambFace) ? `Sized to allow the jamb faces` : ``
             },
             {
                 count: count - 2,
-                name: "liner-vertical-interior",
+                name: "Liner (Vertical, Mullion)",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth - (this.hasMullionFace ? this.materialLinerThickness : 0), this.measured.height - this.materialLinerThickness],
                 notes: (this.hasMullionFace) ? `Sized to allow the mullion faces` : ``
             },
@@ -655,26 +655,26 @@ ${[...this.measured.drawLines()].join("\n")}
         return [
             {
                 count: 2,
-                name: "liner-horizontal",
+                name: "Liner (Horizontal)",
                 dimensions: [this.materialLinerThickness, this.materialLinerDepth, this.measured.width],
                 notes: (this.hasJambFace || this.hasMullionFace) ? `Cut recesses for the mullion or jamb faces` : ``
             },
             ...linersVertical,
             ...jambs,
             ...mullions,
-            { count, name: "sash-horizontal", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth] },
-            { count, name: "sash-vertical", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight] },
-            { count, name: "moulding-horizontal", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingHorizontal] },
-            { count, name: "moulding-vertical", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingVertical] },
-            { count, name: "stop-horizontal", dimensions: [this.materialStopShort, this.materialStopLong, this.stopHorizontal] },
-            { count, name: "stop-vertical", dimensions: [this.materialStopShort, this.materialStopLong, this.stopVertical] },
-            { count: screenedCasementCount, name: "screen-stop-horizontal", dimensions: [this.materialStopShort, this.materialStopLong, this.screenStopHorizontal] },
-            { count: screenedCasementCount, name: "screen-stop-vertical", dimensions: [this.materialStopShort, this.materialStopLong, this.screenStopVertical] },
-            { count: screenedCasementCount, name: "screen-horizontal", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenWidth] },
-            { count: screenedCasementCount, name: "screen-vertical", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenHeight] },
-            { count: casementCount, name: "glass", dimensions: [this.glassWidth, this.glassHeight, this.materialGlassThickness] },
-            { count, name: "hinge" },
-            { count: casementCount, name: "fastener" },
+            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth] },
+            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight] },
+            { count, name: "Moulding (Horizontal)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingHorizontal] },
+            { count, name: "Moulding (Vertical)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingVertical] },
+            { count, name: "Stop (Horizontal)", dimensions: [this.materialStopShort, this.materialStopLong, this.stopHorizontal] },
+            { count, name: "Stop (Vertical)", dimensions: [this.materialStopShort, this.materialStopLong, this.stopVertical] },
+            { count: screenedCasementCount, name: "Screen Stop (Horizontal)", dimensions: [this.materialStopShort, this.materialStopLong, this.screenStopHorizontal] },
+            { count: screenedCasementCount, name: "Screen Stop (Vertical)", dimensions: [this.materialStopShort, this.materialStopLong, this.screenStopVertical] },
+            { count: screenedCasementCount, name: "Screen (Horizontal)", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenWidth] },
+            { count: screenedCasementCount, name: "Screen (Vertical)", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenHeight] },
+            { count: casementCount, name: "Glass", dimensions: [this.glassWidth, this.glassHeight, this.materialGlassThickness] },
+            { count, name: "Hinge" },
+            { count: casementCount, name: "Fastener" },
         ];
     }
 

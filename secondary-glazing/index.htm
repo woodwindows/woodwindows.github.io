@@ -60,7 +60,7 @@
             imageContainerElement.innerHTML = w.drawX();
 
             const partsElement = document.querySelector("#secondary-parts-list");
-            partsElement.innerHTML = w.parts.map(part => `<div class="count">${part.count}</div><div class="name">${part.name}</div><div class="dimensions">${(part.dimensions ?? []).map(v => +v.toFixed(2)).join(" x ")}</div>`).join("\n");
+            partsElement.innerHTML = w.parts.map(part => `<div class="name">${part.name}</div><div class="count">${part.count}</div><div class="dimensions">${(part.dimensions ?? []).map(v => +v.toFixed(2)).join(" x ")}</div>`).join("\n");
 
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
