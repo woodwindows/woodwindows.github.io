@@ -627,8 +627,8 @@ ${[...this.measured.drawLines()].join("\n")}
         const count = 2 * casementCount;
         const screenedCasementCount = 2 * casementCount; // Don't use openingCasementCount here because there is no seal between secondary casements in our design
 
-        const jambs = this.hasJambFace ? [{ count: 2, name: "jamb", dimensions: [this.materialLinerThickness, this.jambWidth, this.measured.height - this.materialLinerThickness] }] : [];
-        const mullions = this.hasMullionFace ? [{ count: this.mullionCount, name: "mullion", dimensions: [this.materialLinerThickness, this.mullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
+        const jambs = this.hasJambFace ? [{ count: 2, name: "Jamb (Face)", dimensions: [this.materialLinerThickness, this.jambWidth, this.measured.height - this.materialLinerThickness] }] : [];
+        const mullions = this.hasMullionFace ? [{ count: this.mullionCount, name: "Mullion (Face)", dimensions: [this.materialLinerThickness, this.mullionWidth, this.measured.height - this.materialLinerThickness] }] : [];
 
         const linersVertical = (this.hasJambFace == this.hasMullionFace) ? [
             {
