@@ -546,12 +546,12 @@ ${[...this.measured.drawLines()].join("\n")}
         function drawMullion(mullion) {
             const y = 0;
             const left = mullion.x;
-            const right = mullion.x + mullion.width;
+            const right = mullion.x + mullion.width - linerThickness;
             const face = mullion.hasFace ? `<rect x="${left}" y="${height - linerThickness}" width="${mullion.width}" height="${linerThickness}" class="face" />` : ``;
             return `
             <rect x="${left}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
             <text x="${left}" y="${y - 25}" class="location">${left}</text>
-            <rect x="${right - linerThickness}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
+            <rect x="${right}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
             <text x="${right}" y="${y - 25}" class="location">${right}</text>
             ${face}
             `;
@@ -561,7 +561,7 @@ ${[...this.measured.drawLines()].join("\n")}
             const y = 0;
             const faces = this.hasJambFace ? `
                 <rect x="0" y="${height - linerThickness}" width="${this.openingLeft}" height="${linerThickness}" class="face" />
-                <rect x="this.measured.width - this.openingLeft" y="${height - linerThickness}" width="${this.openingLeft}" height="${linerThickness}" class="face" />
+                <rect x="${this.measured.width - this.openingLeft}" y="${height - linerThickness}" width="${this.openingLeft}" height="${linerThickness}" class="face" />
             ` : ``;
             const left = this.openingLeft - linerThickness;
             const right = this.measured.width - this.openingLeft;
