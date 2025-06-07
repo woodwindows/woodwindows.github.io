@@ -63,6 +63,9 @@
             const imageContainerElement = document.querySelector(`#secondary-glazing-image`);
             imageContainerElement.innerHTML = w.drawX();
 
+            const imageContainerElement2 = document.querySelector(`#secondary-glazing-liner-image`);
+            imageContainerElement2.innerHTML = w.drawLinerHorizontal();
+
             const partsElement = document.querySelector("#secondary-parts-list");
             partsElement.innerHTML = w.parts.map(part => `<div class="name">${part.name}</div><div class="count">${part.count}</div><div class="dimensions">${(part.dimensions ?? []).map(v => +v.toFixed(2)).join(" x ")}</div>`).join("\n");
 
@@ -134,6 +137,7 @@
     <p>Here's how your secondary glazing will look.</p>
     <p>The vertical lines show the positions of the openings and glass in the primary windows. You should never see vertical lines passing through the jambs or mullions of the secondary glazing.</p>
     <div id="secondary-glazing-image"></div>
+    <div id="secondary-glazing-liner-image"></div>
     <h3>Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
     <div id="secondary-parts-list"></div>

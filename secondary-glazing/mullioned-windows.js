@@ -466,6 +466,17 @@ export class MullionedWindows {
         }
     }
 
+    *mullions() {
+        let x = this.openingRight;
+        for (let i = 0; i < this.mullionCount; ++i) {
+            const width = this.mullionWidth;
+            const hasFace = this.hasMullionFace;
+            const mullion = { x, width, isFaced: hasFace };
+            yield mullion;
+            x += this.mullionWidth + this.openingWidth;
+        }
+    }
+
     *drawRects() {
         yield `<rect x="${0}" y="${0}" width="${this.measured.width}" height="${this.measured.height}" class="run" />`;
         for (const casement of this.casements()) {
@@ -513,13 +524,66 @@ export class MullionedWindows {
       fill: rgba(105, 103, 236, 0.75);
     }
 </style>
-<rect x="-1000" y="-1000" width="10000" height="10000" class="background" />
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <g id="secondary">
 ${[...this.drawRects()].join("\n")}
 </g>
 <g id="primary">
 ${[...this.measured.drawLines()].join("\n")}
 </g>
+</svg>
+        `;
+    }
+
+    drawLinerHorizontal() {
+        const boxMargin = 100;
+        const boxHeight = this.materialLinerDepth + 2 * boxMargin;
+        const boxWidth = this.measured.width + 2 * boxMargin;
+
+        const height = this.materialLinerDepth;
+        const linerThickness = this.materialLinerThickness;
+
+        function drawMullion(mullion) {
+            const y = 0;
+            const left = mullion.x;
+            const right = mullion.x + mullion.width;
+            const face = mullion.hasFace ? `<rect x="${left}" y="${height - linerThickness}" width="${mullion.width}" height="${linerThickness}" class="face" />` : ``;
+            return `
+            <rect x="${left}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
+            <text x="${left}" y="${y - 25}" class="location">${left}</text>
+            <rect x="${right - linerThickness}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
+            <text x="${right}" y="${y - 25}" class="location">${right}</text>
+            ${face}
+            `;
+        }
+
+        const drawJambs = ()=>{
+            const y = 0;
+            const faces = this.hasJambFace ? `
+                <rect x="0" y="${height - linerThickness}" width="${this.openingLeft}" height="${linerThickness}" class="face" />
+                <rect x="this.measured.width - this.openingLeft" y="${height - linerThickness}" width="${this.openingLeft}" height="${linerThickness}" class="face" />
+            ` : ``;
+            const left = this.openingLeft - linerThickness;
+            const right = this.measured.width - this.openingLeft;
+            return `
+            <rect x="${left}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
+            <text x="${left}" y="${y - 25}" class="location">${left}</text>
+            <rect x="${right}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
+            <text x="${right}" y="${y - 25}" class="location">${right}</text>
+            ${faces}
+            `;
+        }
+
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .liner-horizontal { fill: black; }
+    .channel { fill: white; }
+    .face { fill: white; }
+</style>
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
+<rect x="0" y="0" width="${this.measured.width}" height="${this.materialLinerDepth}" class="liner-horizontal" />
+${[...this.mullions()].map(drawMullion).join("\n")}
 </svg>
         `;
     }
