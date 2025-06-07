@@ -578,8 +578,8 @@ ${[...this.measured.drawLines()].join("\n")}
 <style>
     .background { fill: pink; }
     .liner-horizontal { fill: black; }
-    .channel { fill: white; }
-    .face { fill: white; }
+    .channel { fill: lightgray; }
+    .face { fill: lightgray; }
     .location { fill: gray; }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
