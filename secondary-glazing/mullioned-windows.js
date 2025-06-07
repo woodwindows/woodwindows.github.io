@@ -580,6 +580,7 @@ ${[...this.measured.drawLines()].join("\n")}
     .liner-horizontal { fill: black; }
     .channel { fill: white; }
     .face { fill: white; }
+    .location { fill: gray; }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${this.measured.width}" height="${this.materialLinerDepth}" class="liner-horizontal" />
