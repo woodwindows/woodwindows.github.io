@@ -471,7 +471,7 @@ export class MullionedWindows {
         for (let i = 0; i < this.mullionCount; ++i) {
             const width = this.mullionWidth;
             const hasFace = this.hasMullionFace;
-            const mullion = { x, width, isFaced: hasFace };
+            const mullion = { x, width, hasFace };
             yield mullion;
             x += this.mullionWidth + this.openingWidth;
         }
@@ -584,6 +584,7 @@ ${[...this.measured.drawLines()].join("\n")}
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${this.measured.width}" height="${this.materialLinerDepth}" class="liner-horizontal" />
 ${[...this.mullions()].map(drawMullion).join("\n")}
+${drawJambs()}
 </svg>
         `;
     }
