@@ -29,13 +29,43 @@
         }
     </style>
     <script type="module">
-        import { MullionedWindows } from "./mullioned-windows.js?v=2";
-        const w = new MullionedWindows();
-        console.log(w.measured);
-        console.log(w.measured.openings);
-
+        import { MullionedWindows } from "./mullioned-windows.js?v=3";
         const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
+
+        /** Read the properties from the document into the provided object or a new object if one not provided */
+        function measuredReadFromDocument(o = {}) {
+            for (const property of properties) {
+                const id = "measured-" + property;
+                const value = parseFloat(document.querySelector(`#${id}`).value);
+                o[property] = value;
+            }
+
+            return o;
+        }
+
+        function measuredGetFromStorage() {
+            const state = localStorage.getItem("measured") ?? undefined;
+            if (state === undefined) {
+                return undefined;
+            }
+
+            return JSON.parse(state);
+        }
+
+        function measuredSetToStorage() {
+            const o = measuredReadFromDocument();
+            localStorage.setItem("measured", JSON.stringify(o, null, 2));
+        }
+
+        const savedState = measuredGetFromStorage();
+
+        const w = new MullionedWindows();
+
         for (const property of properties) {
+            if ((savedState !== undefined) && (savedState[property] !== undefined)) {
+                w.measured[property] = savedState[property];
+            }
+
             const value = w.measured[property];
             const id = "measured-" + property;
             document.querySelector(`#${id}`).value = value;
@@ -43,12 +73,7 @@
 
         function calculate() {
             // Set the measured properties from the values set by the user
-            const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
-            for (const property of properties) {
-                const id = "measured-" + property;
-                const value = parseFloat(document.querySelector(`#${id}`).value);
-                w.measured[property] = value;
-            }
+            measuredReadFromDocument(w.measured);
 
             // Recalculate the secondary glazing layout
             w.jambWidth = w.calculateOpeningLeft();
@@ -72,7 +97,7 @@
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
 
-            
+            measuredSetToStorage();
         }
 
         // const calculateButton = document.querySelector("#calculate");
