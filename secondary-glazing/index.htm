@@ -38,11 +38,7 @@
                 const id = "measured-" + property;
                 try {
                     const value = parseFloat(document.querySelector(`#${id}`).value);
-                    if (!isNaN(value)) {
-                        o[property] = value;
-                    } else {
-                        console.log(`Can't parse ${property}`);    
-                    }
+                    o[property] = value;
                 } catch (e) {
                     console.log(`Can't parse ${property}`);
                 }
