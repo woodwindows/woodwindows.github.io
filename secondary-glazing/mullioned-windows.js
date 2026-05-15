@@ -84,9 +84,8 @@ export class ExteriorWindows {
     }
 
     set casementCount(value) {
-        if (value === 0 || isNaN(value)) {
-            this.casementCount_ = undefined;
-            return;
+        if (value === null || value === 0 || isNaN(value)) {
+            value = undefined;
         }
 
         this.casementCount_ = value;
