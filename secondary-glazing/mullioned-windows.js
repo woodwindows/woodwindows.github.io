@@ -560,6 +560,10 @@ ${[...this.measured.drawLines()].join("\n")}
         const height = this.materialLinerDepth;
         const linerThickness = this.materialLinerThickness;
 
+        function limitPrecision(x) {
+            return Math.floor(x * 100)/100;
+        }
+
         function drawMullion(mullion) {
             const y = 0;
             const left = mullion.x;
@@ -567,9 +571,9 @@ ${[...this.measured.drawLines()].join("\n")}
             const face = mullion.hasFace ? `<rect x="${left}" y="${height - linerThickness}" width="${mullion.width}" height="${linerThickness}" class="face" />` : ``;
             return `
             <rect x="${left}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
-            <text x="${left}" y="${y - 25}" class="location">${left}</text>
+            <text x="${left}" y="${y - 25}" class="location">${limitPrecision(left)}</text>
             <rect x="${right}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
-            <text x="${right}" y="${y - 25}" class="location">${right}</text>
+            <text x="${right}" y="${y - 25}" class="location">${limitPrecision(right)}</text>
             ${face}
             `;
         }
@@ -584,9 +588,9 @@ ${[...this.measured.drawLines()].join("\n")}
             const right = this.measured.width - this.openingLeft;
             return `
             <rect x="${left}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
-            <text x="${left}" y="${y - 25}" class="location">${left}</text>
+            <text x="${left}" y="${y - 25}" class="location">${limitPrecision(left)}</text>
             <rect x="${right}" y="${y}" width="${linerThickness}" height="${height}" class="channel" />
-            <text x="${right}" y="${y - 25}" class="location">${right}</text>
+            <text x="${right}" y="${y - 25}" class="location">${limitPrecision(right)}</text>
             ${faces}
             `;
         }
