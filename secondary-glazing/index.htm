@@ -30,7 +30,7 @@
     </style>
     <script type="module">
         import { MullionedWindows } from "./mullioned-windows.js?v=3";
-        const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness", "casementCount_"];
+        const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness", "casementCount"];
 
         /** Read the properties from the document into the provided object or a new object if one not provided */
         function measuredReadFromDocument(o = {}) {
@@ -148,7 +148,7 @@
     </div>
 
     <div>
-        <div>Casement count: <input id="measured-casementCount_" type="number"></div>
+        <div>Casement count: <input id="measured-casementCount" type="number"></div>
         <div class="tip">The number of windows in the set</div>
     </div>
 
