@@ -30,14 +30,18 @@
     </style>
     <script type="module">
         import { MullionedWindows } from "./mullioned-windows.js?v=3";
-        const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness"];
+        const properties = ["height", "width", "openingWidth", "frameThickness", "visibleSashThickness", "casementCount_"];
 
         /** Read the properties from the document into the provided object or a new object if one not provided */
         function measuredReadFromDocument(o = {}) {
             for (const property of properties) {
                 const id = "measured-" + property;
-                const value = parseFloat(document.querySelector(`#${id}`).value);
-                o[property] = value;
+                try {
+                    const value = parseFloat(document.querySelector(`#${id}`).value);
+                    o[property] = value;
+                } catch (e) {
+                    console.log(`Can't parse ${property}`);
+                }
             }
 
             return o;
@@ -142,6 +146,12 @@
         <div>Visible sash thickness (left): <input id="measured-visibleSashThickness" type="number"></div>
         <div class="tip">The distance from the left of the first opening to the left side of the first glass</div>
     </div>
+
+    <div>
+        <div>Casement count: <input id="measured-casementCount_" type="number"></div>
+        <div class="tip">The number of windows in the set</div>
+    </div>
+
     </div>
 
     <p>We assume that your existing windows are symmetrical across the run of casements and within each casement.</p>

@@ -25,6 +25,11 @@ export class ExteriorWindows {
      * @type int */
     visibleSashThickness = 30;
 
+    /**
+     * The number of casements in the set
+     * @type int | undefined */
+    casementCount_ = undefined;
+
     /** The position of the left side of the first opening */
     get openingLeft() {
         return this.frameThickness;
@@ -69,9 +74,22 @@ export class ExteriorWindows {
     /** The number of casements in the run
      * @type int */
     get casementCount() {
+        if (this.casementCount_ !== undefined) {
+            return this.casementCount_;
+        }
+
         const allItems = this.width - (2 * this.openingLeft);
         const oneItem = this.openingWidth;
         return Math.max(Math.floor(allItems / oneItem), 1);
+    }
+
+    set casementCount(value) {
+        if (value === 0) {
+            this.casementCount_ = undefined;
+            return;
+        }
+
+        this.casementCount_ = value;
     }
 
     /** The number of mullions in the run
