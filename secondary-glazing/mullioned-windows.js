@@ -201,6 +201,14 @@ export class MullionedWindows {
     handleMountingDepth = 1;
 
     /**
+     * The extra length of the sash components during construction.
+     * This will be trimmed off flush with the sides of the sash.
+     * This amount extra appears at each end of the sash, so the total
+     * length increase is twice this.
+     * @type double */
+    sashLengthOvershoot = 4;
+
+    /**
      * The thickness of the liner
      * @type double */
     materialLinerThickness = 20.5;
@@ -790,8 +798,6 @@ ${drawJambs()}
             },
         ];
 
-        const roughAdjust = 4 * 2; // TODO
-
         return [
             {
                 count: 2,
@@ -802,8 +808,8 @@ ${drawJambs()}
             ...linersVertical,
             ...jambs,
             ...mullions,
-            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth + roughAdjust] },
-            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight + roughAdjust] },
+            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth + this.sashLengthOvershoot * 2] },
+            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight + this.sashLengthOvershoot * 2] },
             { count, name: "Moulding (Horizontal)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingHorizontal] },
             { count, name: "Moulding (Vertical)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingVertical] },
             { count, name: "Stop (Horizontal)", dimensions: [this.materialStopShort, this.materialStopLong, this.stopHorizontal] },
@@ -962,6 +968,7 @@ ${drawJambs()}
             openingHeight: this.openingHeight,
             sashWidth: this.sashWidth,
             sashHeight: this.sashHeight,
+            sashLengthOvershoot: this.sashLengthOvershoot,
             glassWidth: this.glassWidth,
             glassHeight: this.glassHeight,
             glassOverlap: this.glassOverlap,
