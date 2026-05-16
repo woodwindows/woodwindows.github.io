@@ -652,7 +652,7 @@ ${drawJambs()}
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
-<rect x="${this.rebateDepthRemainder/2}" y="0" width="${this.rebateDepthRemainder/2}" height="${this.materialSashThickness}" class="tenon-piece" />
+<rect x="0" y="${this.rebateDepthRemainder/2}" height="${this.rebateDepthRemainder/2}" width="${this.materialSashThickness}" class="tenon-piece" />
 <rect x="${this.materialSashThickness}" y="0" width="${boxWidth}" height="${this.materialSashThickness}" class="mortice-piece" />
 </svg>
         `;
