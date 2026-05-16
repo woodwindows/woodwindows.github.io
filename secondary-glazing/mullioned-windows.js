@@ -642,8 +642,8 @@ ${drawJambs()}
 <rect x="${this.rebateDepthRemainder/2}" y="0" width="${this.rebateDepthRemainder/2}" height="${this.materialSashThickness}" class="tenon-piece" id="tenon" />
 <rect x="0" y="${this.materialSashThickness}" width="${this.materialSashThickness}" height="${boxHeight}" class="tenon-piece" />
 
-<text x="-10" y="${this.materialSashThickness/2}" class="location">EXT</text>
-<text x="${10 + this.materialSashThickness}" y="${this.materialSashThickness/2}" class="location">INT</text>
+<text font-size="4" x="-6" y="${this.materialSashThickness/2}" class="location">EXT</text>
+<text font-size="4" x="${2 + this.materialSashThickness}" y="${this.materialSashThickness/2}" class="location">INT</text>
 </svg>
         `;
     }
@@ -667,6 +667,9 @@ ${drawJambs()}
 <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
 <rect x="0" y="${this.rebateDepthRemainder/2}" height="${this.rebateDepthRemainder/2}" width="${this.materialSashThickness}" class="tenon-piece" />
 <rect x="${this.materialSashThickness}" y="0" width="${boxWidth}" height="${this.materialSashThickness}" class="mortice-piece" />
+
+<text font-size="4" y="-6" x="${this.materialSashThickness/2}" class="location">EXT</text>
+<text font-size="4" y="${2 + this.materialSashThickness}" x="${this.materialSashThickness/2}" class="location">INT</text>
 </svg>
         `;
     }
