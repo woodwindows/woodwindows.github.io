@@ -184,15 +184,20 @@
             const verticalPiecesPerUnit = Math.floor(sashUnit / v);
             const verticalRemainder = sashUnit - (verticalPiecesPerUnit * v);
 
+            const vNeed = Math.ceil((w.casementCount * 2)/verticalPiecesPerUnit);
+
             const h = w.sashWidthRough;
             const horizontalPiecesPerUnit = Math.floor(sashUnit / h);
             const horizontalRemainder = sashUnit - (horizontalPiecesPerUnit * h);
+
+            const hNeed = Math.ceil((w.casementCount * 2)/horizontalPiecesPerUnit);
 
             materialsElement.innerHTML = `
             <p>ROUGH SASH CALCULATION</p>
             <p>2x2 length: ${sashUnit} mm</p>
             <p>Horizontal: ${horizontalPiecesPerUnit} pieces at ${h} mm (${horizontalRemainder} mm left)</p>
             <p>Vertical: ${verticalPiecesPerUnit} pieces at ${v} mm (${verticalRemainder} mm left)</p>
+            <p>Need ${hNeed} + ${vNeed} = ${hNeed + vNeed}</p>
             `;
 
             measuredSetToStorage();
