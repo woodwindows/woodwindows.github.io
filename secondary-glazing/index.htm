@@ -181,9 +181,12 @@
             const sashUnit = 2400; // The length of a 2x2
 
             const verticalPiecesPerUnit = Math.floor(sashUnit / w.sashHeight);
-            const horizontalPiecesPerUnit = Math.floor(sashUnit / w.sashWidth);
+            const verticalRemainder = sashUnit - (verticalPiecesPerUnit * w.sashHeight);
 
-            materialsElement.innerHTML = `Sash unit ${sashUnit}; ${verticalPiecesPerUnit} vertical pieces; ${horizontalPiecesPerUnit} horizontal pieces`;
+            const horizontalPiecesPerUnit = Math.floor(sashUnit / w.sashWidth);
+            const horizontalRemainder = sashUnit - (horizontalPiecesPerUnit * w.sashWidth);
+
+            materialsElement.innerHTML = `Sash unit: ${sashUnit} mm; Vertical: ${verticalPiecesPerUnit} pieces at ${w.sashHeight} mm (${verticalRemainder} mm left); Horizontal: ${horizontalPiecesPerUnit} pieces at ${w.sashWidth} (${horizontalRemainder} mm left)`;
 
             measuredSetToStorage();
         }
