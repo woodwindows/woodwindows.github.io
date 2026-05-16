@@ -647,7 +647,7 @@ ${drawJambs()}
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
-    .tenon-piece { fill: rgba(105, 103, 236, 0.1); }
+    .tenon-piece { fill: pink }
     .mortice-piece { fill: rgba(105, 103, 236, 1.0); }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
