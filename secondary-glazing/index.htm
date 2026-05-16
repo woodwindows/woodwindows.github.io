@@ -176,6 +176,9 @@
             const dataElement = document.querySelector(`#secondary-glazing-data`);
             dataElement.innerText = w.toString();
 
+            const materialsElement = document.querySelector(`#materials-calculations`);
+            materialsElement.innerHTML = "TODO";
+
             measuredSetToStorage();
         }
 
@@ -253,9 +256,11 @@
     <div id="secondary-glazing-tenon-image"></div>
     <p>This shows the top view of the mortice:</p>
     <div id="secondary-glazing-mortice-image"></div>
-    <h3>Parts List</h3>
+    <h3 id="parts">Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
     <div id="secondary-parts-list"></div>
+    <h3 id="materials">Materials</h3>
+    <div id="materials-calculations"></div>
     <h3>Data</h3>
     <p>Here's a dump of the data for your secondary glazing including a parts list:</p>
     <div id="secondary-glazing-data"></div>
