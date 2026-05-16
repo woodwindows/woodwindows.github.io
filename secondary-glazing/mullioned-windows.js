@@ -641,6 +641,9 @@ ${drawJambs()}
 <rect x="${this.rebateDepthRemainder}" y="${this.rebateHeightRemainder}" width="${this.rebateDepth}" height="${this.rebateHeight}" class="tenon-piece" id="high-shoulder" />
 <rect x="${this.rebateDepthRemainder/2}" y="0" width="${this.rebateDepthRemainder/2}" height="${this.materialSashThickness}" class="tenon-piece" id="tenon" />
 <rect x="0" y="${this.materialSashThickness}" width="${this.materialSashThickness}" height="${boxHeight}" class="tenon-piece" />
+
+<text x="-10" y="${this.materialSashThickness/2}" class="location">EXT</text>
+<text x="${10 + this.materialSashThickness}" y="${this.materialSashThickness/2}" class="location">INT</text>
 </svg>
         `;
     }
