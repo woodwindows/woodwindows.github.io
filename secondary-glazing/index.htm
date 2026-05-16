@@ -142,6 +142,9 @@
             const imageContainerElement2 = document.querySelector(`#secondary-glazing-liner-image`);
             imageContainerElement2.innerHTML = w.drawLinerHorizontal();
 
+            const imageContainerElement3 = document.querySelector(`#secondary-glazing-tenon-image`);
+            imageContainerElement3.innerHTML = w.drawTenon();
+
             const partsElement = document.querySelector("#secondary-parts-list");
             partsElement.innerHTML = w.parts.map(part => `<div class="part"><div class="name">${part.name}</div><div class="dimensions">${(part.dimensions ?? []).map(v => +v.toFixed(2)).join(" x ")}</div><div class="count">${part.count}</div></div>`).join("\n");
 
@@ -221,6 +224,8 @@
     <div id="secondary-glazing-image"></div>
     <p>This shows the plan view of the bottom liner and the positions for the jambs and mullions:</p>
     <div id="secondary-glazing-liner-image"></div>
+    <p>This shows the side view of the tenon:</p>
+    <div id="secondary-glazing-tenon-image"></div>
     <h3>Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
     <div id="secondary-parts-list"></div>

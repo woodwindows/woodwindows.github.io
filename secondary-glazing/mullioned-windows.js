@@ -611,6 +611,28 @@ ${drawJambs()}
         `;
     }
 
+    drawTenon() {
+        const boxMargin = 100;
+        const boxHeight = this.materialSashThickness + 2 * boxMargin;
+        const boxWidth = this.materialSashThickness + 2 * boxMargin;
+
+        function limitPrecision(x) {
+            return Math.floor(x * 100)/100;
+        }
+
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .piece { fill: white; }
+    .rebate { fill: rgba(105, 103, 236, 0.75); }
+</style>
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
+<rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="piece" />
+<rect x="0" y="0" width="${this.rebateDepth}" height="${this.rebateHeight}" class="rebate" />
+</svg>
+        `;
+    }
+
     get sashWidth() {
         return this.openingWidth - (2 * this.gap);
     }
