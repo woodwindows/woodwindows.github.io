@@ -687,7 +687,7 @@ ${drawJambs()}
     }
 
     get sashHeightRough() {
-        return this.sashHeightRough + 2 * this.sashLengthOvershoot;
+        return this.sashHeight + 2 * this.sashLengthOvershoot;
     }
 
     get screenWidth() {
