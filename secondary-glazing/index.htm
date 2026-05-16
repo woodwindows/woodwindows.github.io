@@ -188,9 +188,12 @@
             const horizontalPiecesPerUnit = Math.floor(sashUnit / h);
             const horizontalRemainder = sashUnit - (horizontalPiecesPerUnit * h);
 
-            materialsElement.innerHTML = `Sash unit: ${sashUnit} mm;
-            Vertical: ${verticalPiecesPerUnit} pieces at ${v} mm (${verticalRemainder} mm left);
-            Horizontal: ${horizontalPiecesPerUnit} pieces at ${h} mm (${horizontalRemainder} mm left)`;
+            materialsElement.innerHTML = `
+            <p>ROUGH CALCULATION</p>
+            <p>Sash unit: ${sashUnit} mm</p>
+            <p>Horizontal: ${horizontalPiecesPerUnit} pieces at ${h} mm (${horizontalRemainder} mm left)</p>
+            <p>Vertical: ${verticalPiecesPerUnit} pieces at ${v} mm (${verticalRemainder} mm left)</p>
+            `;
 
             measuredSetToStorage();
         }
