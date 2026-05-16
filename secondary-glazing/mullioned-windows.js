@@ -623,12 +623,15 @@ ${drawJambs()}
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
-    .piece { fill: white; }
+    .mortice-piece { fill: white; }
+    .tenon-piece { fill: rgba(105, 103, 236, 0.75); }
     .rebate { fill: rgba(105, 103, 236, 0.75); }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
-<rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="piece" />
-<rect x="0" y="0" width="${this.rebateDepth}" height="${this.rebateHeight}" class="rebate" />
+<rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
+<rect x="${this.rebateDepthRemainder}" y="${this.rebateHeightRemainder}" width="${this.rebateDepth}" height="${this.rebateHeight}" class="tenon-piece" id="high-shoulder" />
+<rect x="${this.rebateDepthRemainder/2}" y="0" width="${this.rebateDepthRemainder/2}" height="${this.materialSashThickness}" class="tenon-piece" id="tenon" />
+<rect x="0" y="${this.materialSashThickness}" width="${this.materialSashThickness}" height="${boxHeight}" class="tenon-piece" />
 </svg>
         `;
     }
