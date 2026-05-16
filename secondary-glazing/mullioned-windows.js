@@ -612,7 +612,7 @@ ${drawJambs()}
     }
 
     drawTenon() {
-        const boxMargin = 100;
+        const boxMargin = this.materialSashThickness;
         const boxHeight = this.materialSashThickness + 2 * boxMargin;
         const boxWidth = this.materialSashThickness + 2 * boxMargin;
 
