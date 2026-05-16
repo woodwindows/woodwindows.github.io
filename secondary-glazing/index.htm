@@ -27,6 +27,36 @@
         #secondary-parts-list .name {
             font-weight: bold;
         }
+
+        #secondary-parts-list {
+            background-color: lightgray;
+        }
+
+        .part:nth-child(odd) {
+            background-color: cornsilk;
+        }
+
+        .part {
+            padding-block-start: 1rem;
+            padding-block-end: 1rem;
+            padding-inline-start: 0.5rem;
+        }
+
+        .part .count:before {
+            content: 'Count: ';
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .part .count {
+            margin-block-start: 0.25rem;
+        }
+
+        .part .dimensions {
+            font-size: 1.2rem;
+            font-family: "Avenir";
+            padding-block-start: 0.5rem;
+        }
     </style>
     <script type="module">
         import { MullionedWindows } from "./mullioned-windows.js?v=3";
