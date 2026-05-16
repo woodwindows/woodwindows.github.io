@@ -624,8 +624,7 @@ ${drawJambs()}
 <style>
     .background { fill: pink; }
     .mortice-piece { fill: white; }
-    .tenon-piece { fill: rgba(105, 103, 236, 0.75); }
-    .rebate { fill: rgba(105, 103, 236, 0.75); }
+    .tenon-piece { fill: rgba(105, 103, 236, 1.0); }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
