@@ -620,11 +620,13 @@ ${drawJambs()}
             return Math.floor(x * 100)/100;
         }
 
-        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+        return `<svg id="mortice-image" xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
-    .background { fill: pink; }
-    .mortice-piece { fill: rgba(105, 103, 236, 0.1); }
-    .tenon-piece { fill: rgba(105, 103, 236, 1.0); }
+    #mortice-image {
+        .background { fill: pink; }
+        .mortice-piece { fill: rgba(105, 103, 236, 0.1); }
+        .tenon-piece { fill: rgba(105, 103, 236, 1.0); }
+    }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
