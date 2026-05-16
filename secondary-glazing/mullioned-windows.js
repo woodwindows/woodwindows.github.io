@@ -744,6 +744,7 @@ ${drawJambs()}
         return this.materialSashThickness - this.rebateDepth;
     }
 
+    /*
     get tenonThickness() {
         return Math.ceil(this.materialSashThickness / 3);
     }
@@ -751,6 +752,7 @@ ${drawJambs()}
     get tenonDimension() {
         return this.materialSashThickness - this.rebateHeight;
     }
+    */
 
     get depth() {
         return this.setback + this.materialSashThickness + this.materialStopLong + this.materialStopShort;
@@ -867,6 +869,7 @@ ${drawJambs()}
         return commands.join(" ");
     }
 
+    /*
     * _pathSashVertical() {
         const commands = [
             `h ${this.tenonDimension}`,
@@ -896,8 +899,9 @@ ${drawJambs()}
         ];
         yield* commands;
     }
+    */
 
-    get pathSashVertical() {
+    /*get pathSashVertical() {
 
         const commands = [
             "M 0 0",
@@ -913,7 +917,7 @@ ${drawJambs()}
             ...this._pathSashHorizontal()
         ];
         return commands.join(" ");
-    }
+    }*/
 
     * rect(width, height) {
         yield* [
@@ -924,6 +928,7 @@ ${drawJambs()}
         ];
     }
 
+    /*
     get pathGlass() {
 
         const commands = [
@@ -943,6 +948,7 @@ ${drawJambs()}
         ];
         return commands.join(" ");
     }
+    */
 
     toJSON() {
         return {
@@ -971,8 +977,8 @@ ${drawJambs()}
             rebateDepth: this.rebateDepth,
             rebateHeightRemainder: this.rebateHeightRemainder,
             rebateDepthRemainder: this.rebateDepthRemainder,
-            tenonThickness: this.tenonThickness,
-            tenonDimension: this.tenonDimension,
+            // tenonThickness: this.tenonThickness,
+            // tenonDimension: this.tenonDimension,
             depth: this.depth,
 
             openings: this.openings,
