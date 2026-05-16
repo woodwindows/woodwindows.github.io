@@ -682,6 +682,14 @@ ${drawJambs()}
         return this.openingHeight - (2 * this.gap);
     }
 
+    get sashWidthRough() {
+        return this.sashWidth + 2 * this.sashLengthOvershoot;
+    }
+
+    get sashHeightRough() {
+        return this.sashHeightRough + 2 * this.sashLengthOvershoot;
+    }
+
     get screenWidth() {
         return this.openingWidth - (2 * this.materialStopShort) - (2 * this.gap);
     }
@@ -814,8 +822,8 @@ ${drawJambs()}
             ...linersVertical,
             ...jambs,
             ...mullions,
-            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth + this.sashLengthOvershoot * 2] },
-            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight + this.sashLengthOvershoot * 2] },
+            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidthRough] },
+            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeightRough] },
             { count, name: "Moulding (Horizontal)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingHorizontal] },
             { count, name: "Moulding (Vertical)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingVertical] },
             { count, name: "Stop (Horizontal)", dimensions: [this.materialStopShort, this.materialStopLong, this.stopHorizontal] },
