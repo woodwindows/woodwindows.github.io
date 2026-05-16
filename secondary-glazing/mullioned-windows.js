@@ -788,6 +788,8 @@ ${drawJambs()}
             },
         ];
 
+        const roughAdjust = 4 * 2; // TODO
+
         return [
             {
                 count: 2,
@@ -798,8 +800,8 @@ ${drawJambs()}
             ...linersVertical,
             ...jambs,
             ...mullions,
-            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth] },
-            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight] },
+            { count, name: "Sash (Horizontal)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashWidth + roughAdjust] },
+            { count, name: "Sash (Vertical)", dimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight], roughDimensions: [this.materialSashThickness, this.materialSashThickness, this.sashHeight + roughAdjust] },
             { count, name: "Moulding (Horizontal)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingHorizontal] },
             { count, name: "Moulding (Vertical)", dimensions: [this.materialMouldingHeight, this.materialMouldingDepth, this.mouldingVertical] },
             { count, name: "Stop (Horizontal)", dimensions: [this.materialStopShort, this.materialStopLong, this.stopHorizontal] },
