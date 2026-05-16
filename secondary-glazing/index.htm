@@ -177,7 +177,13 @@
             dataElement.innerText = w.toString();
 
             const materialsElement = document.querySelector(`#materials-calculations`);
-            materialsElement.innerHTML = "TODO";
+
+            const sashUnit = 2400; // The length of a 2x2
+
+            const verticalPiecesPerUnit = Math.floor(sashUnit / w.sashHeight);
+            const horizontalPiecesPerUnit = Math.floor(sashUnit / w.sashWidth);
+
+            materialsElement.innerHTML = `Sash unit ${sashUnit}; ${verticalPiecesPerUnit} vertical pieces; ${horizontalPiecesPerUnit} horizontal pieces`;
 
             measuredSetToStorage();
         }
