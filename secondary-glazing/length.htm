@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENGTHS with MAXIMUM OVERAGE</title>
+    <script type="module">
+        const length = 2400;
+        const piece = 476;
+
+        const count = Math.floor(length/piece);
+        const extra = length - count * piece;
+        const extraPerPiece = Math.floor(extra/count);
+        const step = piece + extraPerPiece;
+
+        document.querySelector("#length").innerHTML = `${length}`;
+        document.querySelector("#piece").innerHTML = `${piece}`;
+        document.querySelector("#count").innerHTML = `${count}`;
+
+        let current = 0;
+        document.querySelector("#cuts").innerHTML = Array.from({ length: count - 1 }, (v, n) => {
+            current += step;
+            return `<div class="cut">${current}</div>`;
+        }).join("\n");
+    </script>
+</head>
+<body>
+    <h2>Length</h2>
+    <div id="length"></div>
+    <h2>Piece</h2>
+    <div id="piece"></div>
+    <h2>Count</h2>
+    <div id="count"></div>
+    <h2>Cuts</h2>
+    <div id="cuts"></div>
+    <h2>Description</h2>
+    <p>Given a length of wood from which you want to cut pieces, where should you place the cuts to get the maximum number of pieces from the wood and with the maximum extra length available for each piece?</p>
+</body>
+</html>
