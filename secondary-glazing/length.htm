@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maximum Count, Maximum Size</title>
     <script type="module">
-        const length = 2400;
-        const piece = 476;
+        const params = new URLSearchParams(document.location.search);
+
+        const length = parseInt(params.get("length") ?? 2400, 10);
+        const piece = parseInt(params.get("piece") ?? 476, 10);
 
         const count = Math.floor(length/piece);
         const extra = length - count * piece;
