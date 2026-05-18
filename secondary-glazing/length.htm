@@ -7,15 +7,15 @@
     <script type="module">
         const params = new URLSearchParams(document.location.search);
 
-        const length = parseInt(params.get("length") ?? 2400, 10);
+        const lumber = parseInt(params.get("lumber") ?? 2400, 10);
         const piece = parseInt(params.get("piece") ?? 476, 10);
 
-        const count = Math.floor(length/piece);
-        const extra = length - count * piece;
+        const count = Math.floor(lumber/piece);
+        const extra = lumber - count * piece;
         const extraPerPiece = Math.floor(extra/count);
         const step = piece + extraPerPiece;
 
-        document.querySelector("#length").innerHTML = `${length}`;
+        document.querySelector("#lumber").innerHTML = `${lumber}`;
         document.querySelector("#piece").innerHTML = `${piece}`;
         document.querySelector("#count").innerHTML = `${count}`;
 
@@ -28,9 +28,9 @@
 </head>
 <body>
     <h1>Maximum Count, Maximum Size</h1>
-    <h2>Length</h2>
-    <div id="length"></div>
-    <h2>Piece</h2>
+    <h2>Lumber Length</h2>
+    <div id="lumber"></div>
+    <h2>Piece Length</h2>
     <div id="piece"></div>
     <h2>Count</h2>
     <div id="count"></div>
@@ -38,5 +38,8 @@
     <div id="cuts"></div>
     <h2>Description</h2>
     <p>Given a length of wood from which you want to cut pieces of a particular size, where should you place the cuts to get the maximum number of pieces from the wood and with the maximum extra length available for each piece?</p>
+    <h3>URL Parameters</h3>
+    <p>lumber - the length of the lumber being cut - defaults to 2400</p>
+    <p>piece - the length of the piece being cut from the lumber</p>
 </body>
 </html>
