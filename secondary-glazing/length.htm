@@ -25,6 +25,11 @@
             return `<div class="cut">${current}</div>`;
         }).join("\n");
     </script>
+    <style>
+        .param {
+            font-family: "Monaspace Neon", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        }
+    </style>
 </head>
 <body>
     <h1>Maximum Count, Maximum Size</h1>
@@ -39,7 +44,7 @@
     <h2>Description</h2>
     <p>Given a length of wood from which you want to cut pieces of a particular size, where should you place the cuts to get the maximum number of pieces from the wood and with the maximum extra length available for each piece?</p>
     <h3>URL Parameters</h3>
-    <p>lumber - the length of the lumber being cut - defaults to 2400</p>
-    <p>piece - the length of the piece being cut from the lumber</p>
+    <p><span class="param">lumber</span> - the length of the lumber being cut - defaults to 2400</p>
+    <p><span class="param">piece</span> - the length of the piece being cut from the lumber</p>
 </body>
 </html>
