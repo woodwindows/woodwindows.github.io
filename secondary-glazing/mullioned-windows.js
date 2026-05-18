@@ -206,7 +206,7 @@ export class MullionedWindows {
      * This amount extra appears at each end of the sash, so the total
      * length increase is twice this.
      * @type double */
-    sashLengthOvershoot = 4;
+    sashLengthOverage = 25;
 
     /**
      * The thickness of the liner
@@ -683,11 +683,11 @@ ${drawJambs()}
     }
 
     get sashWidthRough() {
-        return this.sashWidth + 2 * this.sashLengthOvershoot;
+        return this.sashWidth + 2 * this.sashLengthOverage;
     }
 
     get sashHeightRough() {
-        return this.sashHeight + 2 * this.sashLengthOvershoot;
+        return this.sashHeight + 2 * this.sashLengthOverage;
     }
 
     get screenWidth() {
@@ -982,7 +982,6 @@ ${drawJambs()}
             openingHeight: this.openingHeight,
             sashWidth: this.sashWidth,
             sashHeight: this.sashHeight,
-            sashLengthOvershoot: this.sashLengthOvershoot,
             glassWidth: this.glassWidth,
             glassHeight: this.glassHeight,
             glassOverlap: this.glassOverlap,
