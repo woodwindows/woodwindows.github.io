@@ -82,7 +82,7 @@
 
         o.morticeOverlapsRebateX = (o.morticeX1 < o.rebateX) && (o.rebateX < o.morticeX2);
 
-        o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), o.shoulderHeight);
+        o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), (o.shoulderHeight - o.wedgeHeight));
 
         o.tenonBottomMax = o.morticeOverlapsRebateX ? o.rebateY : o.materialHeight;
         o.tenonBottomMaxAfterShoulder = o.tenonBottomMax - o.shoulderHeight;
@@ -164,7 +164,7 @@
     <p>The outer mortice needs space for the wedge so its bottom can be lower by the wedge height (<span data-name="wedgeHeight"></span> mm):</p>
     <p>Mortice y2: <span data-name="morticeY2"></span></p>
     <p>The position of the top of the outer mortice is determined as a small fraction of the material height (End fraction = <span data-name="endFraction"></span>) but importantly limited by the need to preserve enough material strength at the top of the mortice 
-        so it cannot be less than the minimum (End minimum = <span data-name="endMinimum"></span> mm) nor less than the shoulder height (<span data-name="shoulderHeight"></span> mm)</p>
+        so it cannot be less than the minimum (End minimum = <span data-name="endMinimum"></span> mm) nor can it produce an inner mortice with less than the defined shoulder height (<span data-name="shoulderHeight"></span> mm)</p>
     <p>Mortice y1: <span data-name="morticeY1"></span></p>
     <p>The height of the outer mortice is determined by the positions of its top and bottom:</p>
     <p>Mortice height: <span data-name="morticeHeight"></span></p>
@@ -173,9 +173,9 @@
     <p>Inner Mortice y2: <span data-name="innerMorticeY2"></span></p>
     <p>Inner Mortice height: <span data-name="innerMorticeHeight"></span></p>
     <p>And gathering the outer mortice in one place:</p>
-    <p>Mortice y1: <span data-name="morticeY1"></span></p>
-    <p>Mortice y2: <span data-name="morticeY2"></span></p>
-    <p>Mortice height: <span data-name="morticeHeight"></span></p>
+    <p>Outer Mortice y1: <span data-name="morticeY1"></span></p>
+    <p>Outer Mortice y2: <span data-name="morticeY2"></span></p>
+    <p>Outer Mortice height: <span data-name="morticeHeight"></span></p>
 
 
     <h2>Description</h2>
