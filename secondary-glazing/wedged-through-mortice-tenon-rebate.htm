@@ -5,25 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single Wedged Through Mortice & Tenon in Rebated Material - Calculator</title>
     <script type="module">
+        const params = new URLSearchParams(document.location.search);
+
+        const getInt = (name) => {
+            const value = params.get(name) ?? undefined;
+            if (value === undefined) {
+                return undefined;
+            }
+            return parseInt(value, 10);
+        }
+
+        const getFloat = (name) => {
+            const value = params.get(name) ?? undefined;
+            if (value === undefined) {
+                return undefined;
+            }
+            return parseFloat(value);
+        }
+
         const o = {};
         
         // The dimensions of the material making the frame
-        o.materialWidth = 44;
-        o.materialHeight = 44;
+        o.materialWidth = getInt("materialWidth") ?? 44;
+        o.materialHeight = getInt("materialHeight") ?? 44;
 
         // The dimensions of the rebate removed from the frame
-        o.rebateWidth = 8; //25;
-        o.rebateHeight = 9;
+        o.rebateWidth = getInt("rebateWidth") ?? 25;
+        o.rebateHeight = getInt("rebateHeight") ?? 9;
 
         // The minimum shoulder at the bottom of the tenon
         // A shoulder helps hide inaccuracies - with no shoulder, we might see a gap on the inside where the stile meets the rail
-        o.shoulderHeight = 0; //4;
+        o.shoulderHeight = getInt("shoulderHeight") ?? 4;
 
         // The extra height on the mortice provided by one wedge
-        o.wedgeHeight = 4;
+        o.wedgeHeight = getInt("wedgeHeight") ?? 4;
 
-        o.endFraction = 0.2;
-        o.endMinimum = 6;
+        o.endFraction = getFloat("endFraction") ?? 0.2;
+        o.endMinimum = getInt("endMinimum") ?? 6;
 
         // Imagine looking at the top-left corner of a window
         // Rebates meet in bottom right corner of the receiving piece, origin top left corner
@@ -31,7 +49,7 @@
         o.rebateY = o.materialHeight - o.rebateHeight;
 
         // Chisel or drill sizes in order from small to large
-        o.availableChisels = [8, 12, 14, 6, 25].toSorted((a, b) => a - b);
+        o.availableChisels = [8, 12, 6, 25].toSorted((a, b) => a - b);
 
         o.third = o.materialWidth/3;
 
@@ -56,7 +74,7 @@
             }
         });
 
-        o.availableThird = best;
+        o.availableThird = best ?? heavyThird;
 
         o.morticeWidth = o.availableThird;
         o.morticeX1 = Math.floor((o.materialWidth - o.morticeWidth)/2);
@@ -123,7 +141,7 @@
     <p>A third of the width: <span data-name="third"></span></p>
     <p>This may not be an integer so we round up:</p>
     <p>A third of the width: <span data-name="heavyThird"></span></p>
-    <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool.</p>
+    <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool we use to create it.</p>
     <p>First, we exclude any tools that would create a mortice that is too small or too large (less than 1/4 or greater than 1/2 of the material width):</p>
     <p>Applicable chisels or drills: <span data-name="applicableChisels"></span></p>
     <p>Then we pick the best tool from the applicable tools:</p>
@@ -141,12 +159,12 @@
     <p>If the mortice does overlap the rebate, the mortice cannot extend to the bottom of the available area, we must exclude the rebate height.
         If we were to allow the mortice to extend to the bottom, the tenon would not be able to fill it completely because of the rebate in the tenon piece.</p>
     <p>Tenon bottom maximum: <span data-name="tenonBottomMax"></span></p>
-    <p>With a shoulder defined on the tenon, the position of the mortice can't extend quite as far:</p>
+    <p>With a shoulder defined on the tenon, the position of the mortice can't extend quite as far. The shoulder is <span data-name="shoulderHeight"></span> mm:</p>
     <p>Tenon bottom maximum: <span data-name="tenonBottomMaxAfterShoulder"></span></p>
-    <p>The outer mortice needs to account for the wedge so it is lower:</p>
+    <p>The outer mortice needs space for the wedge so its bottom can be lower by the wedge height (<span data-name="wedgeHeight"></span> mm):</p>
     <p>Mortice y2: <span data-name="morticeY2"></span></p>
-    <p>The position of the top of the outer mortice is determined as a small fraction of the material height (End Fraction = <span data-name="endFraction"></span>) but importantly limited by the need to preserve enough material strength at the top of the mortice 
-        so it cannot be less than the minimum (End Minimum = <span data-name="endMinimum"></span>) nor less than the shoulder height (<span data-name="shoulderHeight"></span>)</p>
+    <p>The position of the top of the outer mortice is determined as a small fraction of the material height (End fraction = <span data-name="endFraction"></span>) but importantly limited by the need to preserve enough material strength at the top of the mortice 
+        so it cannot be less than the minimum (End minimum = <span data-name="endMinimum"></span> mm) nor less than the shoulder height (<span data-name="shoulderHeight"></span> mm)</p>
     <p>Mortice y1: <span data-name="morticeY1"></span></p>
     <p>The height of the outer mortice is determined by the positions of its top and bottom:</p>
     <p>Mortice height: <span data-name="morticeHeight"></span></p>
