@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedged Through Single Mortice & Tenon in Rebated Material - Calculator</title>
+    <title>Single Wedged Through Mortice & Tenon in Rebated Material - Calculator</title>
     <script type="module">
         const o = {};
         
@@ -12,8 +12,18 @@
         o.materialHeight = 44;
 
         // The dimensions of the rebate removed from the frame
-        o.rebateWidth = 25;
+        o.rebateWidth = 8; //25;
         o.rebateHeight = 9;
+
+        // The minimum shoulder at the bottom of the tenon
+        // A shoulder helps hide inaccuracies - with no shoulder, we might see a gap on the inside where the stile meets the rail
+        o.shoulderHeight = 0; //4;
+
+        // The extra height on the mortice provided by one wedge
+        o.wedgeHeight = 4;
+
+        o.endFraction = 0.2;
+        o.endMinimum = 6;
 
         // Imagine looking at the top-left corner of a window
         // Rebates meet in bottom right corner of the receiving piece, origin top left corner
@@ -21,7 +31,7 @@
         o.rebateY = o.materialHeight - o.rebateHeight;
 
         // Chisel or drill sizes in order from small to large
-        o.availableChisels = [8, 12, 6, 25].toSorted((a, b) => a - b);
+        o.availableChisels = [8, 12, 14, 6, 25].toSorted((a, b) => a - b);
 
         o.third = o.materialWidth/3;
 
@@ -29,9 +39,11 @@
 
         const heavyThird = o.heavyThird;
 
+        o.applicableChisels = o.availableChisels.filter(w => (o.materialWidth/4 <= w) && (w <= o.materialWidth/2));
+
         let best = undefined;
 
-        o.availableChisels.find(w => {
+        o.applicableChisels.find(w => {
             if (w === heavyThird) {
                 best = w;
                 return best;
@@ -52,46 +64,102 @@
 
         o.morticeOverlapsRebateX = (o.morticeX1 < o.rebateX) && (o.rebateX < o.morticeX2);
 
+        o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), o.shoulderHeight);
+
+        o.tenonBottomMax = o.morticeOverlapsRebateX ? o.rebateY : o.materialHeight;
+        o.tenonBottomMaxAfterShoulder = o.tenonBottomMax - o.shoulderHeight;
+
+        o.morticeY2 = o.tenonBottomMaxAfterShoulder + o.wedgeHeight;
+
+        o.morticeHeight = o.morticeY2 - o.morticeY1;
+
+        o.innerMorticeY1 = o.morticeY1 + o.wedgeHeight;
+        o.innerMorticeY2 = o.morticeY2 - o.wedgeHeight;
+        o.innerMorticeHeight = o.morticeHeight - 2 * o.wedgeHeight;
+
         //////////////////////// DISPLAY ////////////////////////
 
         for (const [name, value] of Object.entries(o)) {
             const elements = [...document.querySelectorAll(`*[data-name='${name}']`)];
             for (const e of elements) {
-                e.innerText = value;
+                e.innerText = Array.isArray(value) ? value.join(", ") : value;
             }
         }
     </script>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            color: lightgray;
+        }
+
+        .focus {
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <h1>
-        <p>Wedged, Through, Single Mortice & Tenon in Rebated Material - Calculator</p>
+        <p>Single, Wedged, Through <span class="focus">Mortice & Tenon</span> in Rebated Material <span class="focus">Calculator</span></p>
         <!-- <p>For the corners of frames, windows, and doors</p> -->
     </h1>
     <h2>Provided</h2>
     <p>Material: <span data-name="materialWidth"></span> x <span data-name="materialHeight"></span></p>
     <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
     <p>Available chisels or drills: <span data-name="availableChisels"></span></p>
-    <h2>Consequences</h2>
+    <p>Wedge height: <span data-name="wedgeHeight"></span></p>
+    <p>Shoulder height: <span data-name="shoulderHeight"></span></p>
+    <p>End fraction: <span data-name="endFraction"></span></p>
+    <p>End minimum: <span data-name="endMinimum"></span></p>
+    <div class="hidden"><h2>Consequences</h2>
     <p>Rebate x: <span data-name="rebateX"></span></p>
     <p>Rebate y: <span data-name="rebateY"></span></p>
+    </div>
     <h2>Calculated</h2>
     <h3>The Mortice Width</h3>
     <p>The mortice width starts out as 1/3 width of the material:</p>
     <p>A third of the width: <span data-name="third"></span></p>
     <p>This may not be an integer so we round up:</p>
-    <p>A third of the width (heavy): <span data-name="heavyThird"></span></p>
-    <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool:</p>
-    <p>Best match for chisel or drill: <span data-name="availableThird"></span></p>
+    <p>A third of the width: <span data-name="heavyThird"></span></p>
+    <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool.</p>
+    <p>First, we exclude any tools that would create a mortice that is too small or too large (less than 1/4 or greater than 1/2 of the material width):</p>
+    <p>Applicable chisels or drills: <span data-name="applicableChisels"></span></p>
+    <p>Then we pick the best tool from the applicable tools:</p>
+    <p>Tool that best matches <span data-name="heavyThird"></span> mm mortice: <span data-name="availableThird"></span></p>
     <p>Specifically, we use the largest chisel or drill that doesn't greatly exceed 1/3 of the material</p>
-    <p>With this information, the mortice width is defined and, because it is centred, so is it's horizontal position:</p>
+    <p>With this information, the mortice width is defined:
     <p>Mortice width: <span data-name="morticeWidth"></span></p>
+    <p>The mortice will be centred horizontally so the position naturally follows from the mortice width and material width:</p>
     <p>Mortice x1: <span data-name="morticeX1"></span></p>
     <p>Mortice x2: <span data-name="morticeX2"></span></p>
-    <p>It's OK for the mortice to overlap its own rebate in the receiving piece</p>
-    <p>Mortice overlaps rebate: <span data-name="morticeOverlapsRebateX"></span></p>
     <h3>The Mortice Height</h3>
+    <p>It's OK for the mortice to overlap its own rebate in the receiving piece, but it does affect the height of the mortice</p>
+    <p>Mortice overlaps rebate: <span data-name="morticeOverlapsRebateX"></span></p>
     <p>If the mortice doesn't overlap the rebate, the mortice can extend to the bottom of the available area.</p>
-    <p>If the mortice does overlap the rebate, the mortice cannot extend to the bottom of the available area, we must exclude the rebate height. If we don't do this, the tenon cannot fill the </p>
+    <p>If the mortice does overlap the rebate, the mortice cannot extend to the bottom of the available area, we must exclude the rebate height.
+        If we were to allow the mortice to extend to the bottom, the tenon would not be able to fill it completely because of the rebate in the tenon piece.</p>
+    <p>Tenon bottom maximum: <span data-name="tenonBottomMax"></span></p>
+    <p>With a shoulder defined on the tenon, the position of the mortice can't extend quite as far:</p>
+    <p>Tenon bottom maximum: <span data-name="tenonBottomMaxAfterShoulder"></span></p>
+    <p>The outer mortice needs to account for the wedge so it is lower:</p>
+    <p>Mortice y2: <span data-name="morticeY2"></span></p>
+    <p>The position of the top of the outer mortice is determined as a small fraction of the material height (End Fraction = <span data-name="endFraction"></span>) but importantly limited by the need to preserve enough material strength at the top of the mortice 
+        so it cannot be less than the minimum (End Minimum = <span data-name="endMinimum"></span>) nor less than the shoulder height (<span data-name="shoulderHeight"></span>)</p>
+    <p>Mortice y1: <span data-name="morticeY1"></span></p>
+    <p>The height of the outer mortice is determined by the positions of its top and bottom:</p>
+    <p>Mortice height: <span data-name="morticeHeight"></span></p>
+    <p>The inner mortice can be calculated from the outer mortice by removing the wedge height at top and bottom</p>
+    <p>Inner Mortice y1: <span data-name="innerMorticeY1"></span></p>
+    <p>Inner Mortice y2: <span data-name="innerMorticeY2"></span></p>
+    <p>Inner Mortice height: <span data-name="innerMorticeHeight"></span></p>
+    <p>And gathering the outer mortice in one place:</p>
+    <p>Mortice y1: <span data-name="morticeY1"></span></p>
+    <p>Mortice y2: <span data-name="morticeY2"></span></p>
+    <p>Mortice height: <span data-name="morticeHeight"></span></p>
+
+
     <h2>Description</h2>
     <p>
         This page describes the design criteria and calculations for deciding on the layout of a mortice and tenon joint when used to join the corners of frames where the material has rebates and a single, wedged, through tenon will be used.
