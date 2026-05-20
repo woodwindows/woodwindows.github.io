@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedged Through Mortice & Tenon in Rebated Material - Calculator</title>
+    <script type="module">
+        const o = {};
+        
+        // The dimensions of the material making the frame
+        o.materialWidth = 44;
+        o.materialHeight = 44;
+
+        // The dimensions of the rebate removed from the frame
+        o.rebateWidth = 25;
+        o.rebateHeight = 9;
+
+        // Chisel or drill sizes in order from small to large
+        o.availableChisels = [8, 12, 6, 25].toSorted((a, b) => a - b);
+
+        o.third = o.materialWidth/3;
+
+        o.heavyThird = Math.ceil(o.third);
+
+        const heavyThird = o.heavyThird;
+
+        let best = undefined;
+
+        o.availableChisels.find(w => {
+            if (w === heavyThird) {
+                best = w;
+                return best;
+            };
+
+            if (w < heavyThird) {
+                best = w;
+            } else {
+                return best;
+            }
+        });
+
+        o.availableThird = best;
+
+        o.morticeWidth = o.availableThird;
+
+        for (const [name, value] of Object.entries(o)) {
+            const elements = [...document.querySelectorAll(`*[data-name='${name}']`)];
+            for (const e of elements) {
+                e.innerText = value;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>
+        <p>Wedged Through Mortice & Tenon in Rebated Material - Calculator</p>
+        <!-- <p>For the corners of frames, windows, and doors</p> -->
+    </h1>
+    <h2>Provided</h2>
+    <p>Material: <span data-name="materialWidth"></span> x <span data-name="materialHeight"></span></p>
+    <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
+    <p>Available chisels or drills: <span data-name="availableChisels"></span></p>
+    <h2>Calculated</h2>
+    <p>A third of the width: <span data-name="third"></span></p>
+    <p>A third of the width (heavy): <span data-name="heavyThird"></span></p>
+    <p>Best match for chisel or drill: <span data-name="availableThird"></span></p>
+    <p>Mortice width: <span data-name="morticeWidth"></span></p>
+    <h2>Description</h2>
+    <p>
+        This page describes the design criteria and calculations for deciding on the layout of a mortice and tenon joint when used to join the corners of frames where the material has rebates and a wedged, through tenon will be used.
+        Frames of this type may be used in the construction of windows and doors or for other purposes.
+    </p>
+    <p>
+        Imagine looking at the side of the top-left corner of a window frame: the rebate is in the bottom right corner.
+    </p>
+</body>
+</html>
