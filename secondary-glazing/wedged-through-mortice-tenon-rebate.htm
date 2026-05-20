@@ -114,6 +114,71 @@
         o.innerMorticeY2 = o.morticeY2 - o.wedgeHeight;
         o.innerMorticeHeight = o.morticeHeight - 2 * o.wedgeHeight;
 
+
+        function drawMortice() {
+            const boxMargin = o.materialWidth/4;
+            const boxHeight = o.materialHeight + 2 * boxMargin;
+            const boxWidth = o.materialWidth + 2 * boxMargin;
+
+            function limitPrecision(x) {
+                return Math.floor(x * 100)/100;
+            }
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .stile { fill: lightblue; }
+    .material { fill: rgba(105, 103, 236, 1.0); }
+    .mortice { fill: yellow; }
+    .mortice-inner { fill: wheat; }
+</style>
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
+<rect x="0" y="0" width="${o.materialWidth}" height="${boxHeight}" class="stile" />
+<rect x="0" y="0" width="${o.materialWidth}" height="${o.materialHeight}" class="material" />
+<rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />
+<rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+</svg>
+        `;
+    }
+
+       function drawMortice2() {
+            const boxMargin = o.materialWidth/4;
+            const boxHeight = o.materialHeight + 2 * boxMargin;
+            const boxWidth = o.materialWidth + 2 * boxMargin;
+
+            function limitPrecision(x) {
+                return Math.floor(x * 100)/100;
+            }
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .stile { fill: lightblue; }
+    .rail { fill: lightblue; }
+    .material { fill: rgba(105, 103, 236, 1.0); }
+    .mortice { fill: yellow; }
+    .mortice-inner { fill: wheat; }
+</style>
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
+<rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
+<rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
+<rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
+<!--<rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />-->
+<polygon points="0 ${o.morticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
+<rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+</svg>
+        `;
+    }
+
+    document.querySelector(`#diagrams`).innerHTML = drawMortice() + drawMortice2();
+
+//     <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
+// <rect x="0" y="${this.rebateDepthRemainder/2}" height="${this.rebateDepthRemainder/2}" width="${this.materialSashThickness}" class="tenon-piece" />
+// <rect x="${this.materialSashThickness}" y="0" width="${boxWidth}" height="${this.materialSashThickness}" class="mortice-piece" />
+
+// <text font-size="4" y="-4" x="${this.materialSashThickness/2}" class="location">EXT</text>
+// <text font-size="4" y="${4 + this.materialSashThickness}" x="${this.materialSashThickness/2}" class="location">INT</text>
+
         //////////////////////// DISPLAY ////////////////////////
 
         for (const [name, value] of Object.entries(o)) {
@@ -153,6 +218,11 @@
     <p>End fraction: <span data-name="endFraction"></span></p>
     <p>End minimum: <span data-name="endMinimum"></span></p>
     
+
+    <div id="diagrams" style="width:25%">
+
+    </div>
+
     <div class="hidden"><h2>Consequences</h2>
     <p>Rebate x: <span data-name="rebateX"></span></p>
     <p>Rebate y: <span data-name="rebateY"></span></p>
