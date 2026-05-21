@@ -41,7 +41,7 @@
         o.shoulderHeight = getInt("shoulderHeight") ?? 4;
 
         // The extra height on the mortice provided by one wedge
-        o.wedgeHeight = getInt("wedgeHeight") ?? 4;
+        o.wedgeHeight = getInt("wedgeHeight") ?? 5;
 
         o.endFraction = getFloat("endFraction") ?? 0.2;
         o.endMinimum = getInt("endMinimum") ?? 6;
@@ -102,6 +102,8 @@
         o.morticeX1 = o.morticeX1Snapped;
         o.morticeX2 = o.morticeX2Snapped;
 
+        o.neckX = o.materialHeight - Math.ceil(o.straightFraction * o.materialHeight);
+
         o.morticeOverlapsRebateX = (o.morticeX1 <= o.rebateX) && (o.rebateX < o.morticeX2);
 
         o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), (o.shoulderHeight - o.wedgeHeight));
@@ -153,8 +155,6 @@
                 return Math.floor(x * 100)/100;
             }
 
-            const neckX = o.materialHeight - Math.ceil(o.straightFraction * o.materialHeight);
-
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
@@ -168,7 +168,7 @@
 <rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
-<polygon points="0 ${o.morticeY1} ${neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
+<polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
 <rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
 </svg>
         `;
@@ -256,6 +256,11 @@
     <p>And these are the final horizontal positions of the mortice:</p>
     <p>Mortice x1: <span data-name="morticeX1"></span></p>
     <p>Mortice x2: <span data-name="morticeX2"></span></p>
+
+    <p>The neck of the mortice (the point at which it transitions from flared to straight) is determined as a small fraction (<span data-name="straightFraction"></span>) of the overall width from the inner edge:</p>
+    <p>Neck x: <span data-name="neckX"></span></p>
+
+
     <h3>The Mortice Height</h3>
     <p>It's OK for the mortice to overlap its own rebate in the receiving piece, but it does affect the height of the mortice</p>
     <p>Mortice overlaps rebate: <span data-name="morticeOverlapsRebateX"></span></p>
