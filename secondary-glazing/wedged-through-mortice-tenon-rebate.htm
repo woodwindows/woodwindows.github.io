@@ -33,6 +33,9 @@
         o.rebateWidth = getInt("rebateWidth") ?? 25;
         o.rebateHeight = getInt("rebateHeight") ?? 9;
 
+        // The proportion of the mortice that should be straight rather than flared
+        o.straightFraction = getFloat("straightFraction") ?? 0.2;
+
         // The minimum shoulder at the bottom of the tenon
         // A shoulder helps hide inaccuracies - with no shoulder, we might see a gap on the inside where the stile meets the rail
         o.shoulderHeight = getInt("shoulderHeight") ?? 4;
@@ -150,6 +153,8 @@
                 return Math.floor(x * 100)/100;
             }
 
+            const neckX = o.materialHeight - Math.ceil(o.straightFraction * o.materialHeight);
+
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
@@ -163,8 +168,7 @@
 <rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
-<!--<rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />-->
-<polygon points="0 ${o.morticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
+<polygon points="0 ${o.morticeY1} ${neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
 <rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
 </svg>
         `;
@@ -212,6 +216,7 @@
     <p>Material: <span data-name="materialWidth"></span> x <span data-name="materialHeight"></span></p>
     <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
     <p>Available chisels or drills: <span data-name="availableChisels"></span></p>
+    <p>Straight fraction: <span data-name="straightFraction"></span></p>
     <p>Rebate snap: <span data-name="rebateSnap"></span></p>
     <p>Wedge height: <span data-name="wedgeHeight"></span></p>
     <p>Shoulder height: <span data-name="shoulderHeight"></span></p>
