@@ -23,6 +23,14 @@
             return parseFloat(value);
         }
 
+        const getIntArray = (name) => {
+            const value = params.get(name) ?? undefined;
+            if (value === undefined) {
+                return undefined;
+            }
+            return value.split(",").map(v => parseInt(v.trim())).filter(v => Number.isInteger(v));
+        };
+
         const o = {};
         
         // The dimensions of the material making the frame
@@ -55,7 +63,7 @@
         o.rebateY = o.materialHeight - o.rebateHeight;
 
         // Chisel or drill sizes in order from small to large
-        o.availableChisels = [8, 12, 6, 25].toSorted((a, b) => a - b);
+        o.chisels = (getIntArray("chisels") ?? [8, 12, 6, 25]).toSorted((a, b) => a - b);
 
         o.third = o.materialWidth/3;
 
@@ -63,7 +71,7 @@
 
         const heavyThird = o.heavyThird;
 
-        o.applicableChisels = o.availableChisels.filter(w => (o.materialWidth/4 <= w) && (w <= o.materialWidth/2));
+        o.applicableChisels = o.chisels.filter(w => (o.materialWidth/4 <= w) && (w <= o.materialWidth/2));
 
         let best = undefined;
 
@@ -215,7 +223,7 @@
     <h2>Provided</h2>
     <p>Material: <span data-name="materialWidth"></span> x <span data-name="materialHeight"></span></p>
     <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
-    <p>Available chisels or drills: <span data-name="availableChisels"></span></p>
+    <p>Chisels: <span data-name="chisels"></span></p>
     <p>Straight fraction: <span data-name="straightFraction"></span></p>
     <p>Rebate snap: <span data-name="rebateSnap"></span></p>
     <p>Wedge height: <span data-name="wedgeHeight"></span></p>
