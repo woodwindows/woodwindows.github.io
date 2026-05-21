@@ -63,7 +63,7 @@
         o.rebateY = o.materialHeight - o.rebateHeight;
 
         // Chisel or drill sizes in order from small to large
-        o.chisels = (getIntArray("chisels") ?? [8, 12, 6, 25]).toSorted((a, b) => a - b);
+        o.chisels = [...new Set((getIntArray("chisels") ?? [8, 12, 6, 25]))].toSorted((a, b) => a - b);
 
         o.third = o.materialWidth/3;
 
