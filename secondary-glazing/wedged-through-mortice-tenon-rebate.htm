@@ -145,9 +145,15 @@
         o.morticeX1 = o.morticeX1Snapped;
         o.morticeX2 = o.morticeX2Snapped;
 
-        o.neckX = o.materialHeight - Math.ceil(o.straightFraction * o.materialHeight);
-
         o.morticeOverlapsRebateX = (o.morticeX1 <= o.rebateX) && (o.rebateX < o.morticeX2);
+
+        let neckInset = Math.ceil(o.straightFraction * o.materialHeight);
+
+        if (o.morticeOverlapsRebateX && neckInset < o.rebateHeight) {
+            neckInset = o.rebateHeight;
+        }
+
+        o.neckX = o.materialHeight - neckInset;
 
         o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), (o.shoulderHeight - o.wedgeHeight));
 
@@ -364,8 +370,11 @@
     <p>Mortice x1: <span data-name="morticeX1"></span></p>
     <p>Mortice x2: <span data-name="morticeX2"></span></p>
 
-    <p>The neck of the mortice (the point at which it transitions from flared to straight) is determined as a small fraction (<span data-name="straightFraction"></span>) of the overall width from the inner edge, giving us this distance from the outer edge:</p>
+    <p>The neck of the mortice (the point at which it transitions from flared to straight) is determined as a small fraction (<span data-name="straightFraction"></span>) of the overall width from the inner edge.
+    But if the mortice overlaps the rebate, we make sure that the mortice doesn't start flaring within the rebate.
+    These calculations give us this distance from the outer edge:</p>
     <p>Neck x: <span data-name="neckX"></span></p>
+    <p></p>
 
     <h3>The Wedge</h3>
     <p>And now we know the final dimensions of our wedges:</p>
