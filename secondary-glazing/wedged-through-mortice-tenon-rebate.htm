@@ -41,6 +41,14 @@
             return value.split(",").map(v => parseInt(v.trim())).filter(v => Number.isInteger(v));
         };
 
+        // Limit the precision of a finite number, otherwise leave it unchanged
+        function limitPrecision(x) {
+            if (Number.isFinite(x)) {
+                return Math.floor(x * 100)/100;
+            }
+            return x;
+        }
+
         const o = {};
         
         // The dimensions of the material making the frame
@@ -156,10 +164,6 @@
             const boxHeight = o.materialHeight + 2 * boxMargin;
             const boxWidth = o.materialWidth + 2 * boxMargin;
 
-            function limitPrecision(x) {
-                return Math.floor(x * 100)/100;
-            }
-
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
     .background { fill: pink; }
@@ -181,10 +185,6 @@
             const boxMargin = o.materialWidth/4;
             const boxHeight = o.materialHeight + 2 * boxMargin;
             const boxWidth = o.materialWidth + 2 * boxMargin;
-
-            function limitPrecision(x) {
-                return Math.floor(x * 100)/100;
-            }
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
@@ -219,7 +219,7 @@
         for (const [name, value] of Object.entries(o)) {
             const elements = [...document.querySelectorAll(`*[data-name='${name}']`)];
             for (const e of elements) {
-                e.innerText = Array.isArray(value) ? value.join(", ") : value;
+                e.innerText = Array.isArray(value) ? value.map(limitPrecision).join(", ") : limitPrecision(value);
             }
         }
     </script>
