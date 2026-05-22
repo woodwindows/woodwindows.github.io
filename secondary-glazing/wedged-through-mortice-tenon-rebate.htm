@@ -168,6 +168,7 @@
 <style>
     .background { fill: pink; }
     .stile { fill: lightblue; }
+    .rebate { stroke: red; stroke-width: 0.1; stroke-dasharray: 0.5 1.5; }
     .material { fill: rgba(105, 103, 236, 1.0); }
     .mortice { fill: yellow; }
     .mortice-inner { fill: wheat; }
@@ -177,6 +178,8 @@
 <rect x="0" y="0" width="${o.materialWidth}" height="${o.materialHeight}" class="material" />
 <rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />
 <rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+<rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
+<rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialHeight - o.rebateHeight}" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
 </svg>
         `;
     }
@@ -191,7 +194,7 @@
     .background { fill: pink; }
     .stile { fill: lightblue; }
     .rail { fill: lightblue; }
-    .rebate { stroke: black; stroke-width: 0.1; stroke-dasharray: 0.5 1.5; }
+    .rebate { stroke: red; stroke-width: 0.1; stroke-dasharray: 0.5 1.5; }
     .material { fill: rgba(105, 103, 236, 1.0); }
     .mortice { fill: yellow; }
     .mortice-inner { fill: wheat; }
