@@ -191,16 +191,20 @@
     .background { fill: pink; }
     .stile { fill: lightblue; }
     .rail { fill: lightblue; }
+    .rebate { stroke: black; stroke-width: 0.1; stroke-dasharray: 0.5 1.5; }
     .material { fill: rgba(105, 103, 236, 1.0); }
     .mortice { fill: yellow; }
     .mortice-inner { fill: wheat; }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
+
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
 <polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
 <rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+<rect x="${o.materialHeight - o.rebateHeight}" y="0" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
+<rect x="${o.materialHeight - o.rebateHeight}" y="${o.materialHeight - o.rebateHeight}" width="${boxWidth}" height="${o.rebateHeight}" class="rebate" />
 </svg>
         `;
     }
