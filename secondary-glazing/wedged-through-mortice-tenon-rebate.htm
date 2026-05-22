@@ -41,6 +41,13 @@
         o.rebateWidth = getInt("rebateWidth") ?? 25;
         o.rebateHeight = getInt("rebateHeight") ?? 9;
 
+        o.roundTo = getFloat("roundTo") ?? 1;
+
+        const roundTo = (value, unit) => {
+            const fn = unit > 3 ? Math.round : Math.ceil;
+            return fn(value/unit) * unit;
+        };
+
         // The proportion of the mortice that should be straight rather than flared
         o.straightFraction = getFloat("straightFraction") ?? 0.2;
 
@@ -67,7 +74,7 @@
 
         o.third = o.materialWidth/3;
 
-        o.heavyThird = Math.ceil(o.third);
+        o.heavyThird = roundTo(o.third, o.roundTo);
 
         const heavyThird = o.heavyThird;
 
@@ -223,6 +230,7 @@
     <h2>Provided</h2>
     <p>Material: <span data-name="materialWidth"></span> x <span data-name="materialHeight"></span></p>
     <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
+    <p>Round to: <span data-name="roundTo"></span></p>
     <p>Chisels: <span data-name="chisels"></span></p>
     <p>Straight fraction: <span data-name="straightFraction"></span></p>
     <p>Rebate snap: <span data-name="rebateSnap"></span></p>
@@ -244,9 +252,9 @@
     <h2>Calculated</h2>
     <h3>The Mortice Width</h3>
     <p>The mortice width starts out as 1/3 width of the material:</p>
-    <p>A third of the width: <span data-name="third"></span></p>
-    <p>This may not be an integer so we round up:</p>
-    <p>A third of the width: <span data-name="heavyThird"></span></p>
+    <p>Suggested width: <span data-name="third"></span></p>
+    <p>Round to the specified unit (Round to: <span data-name="roundTo"></span>):</p>
+    <p>Rounded width: <span data-name="heavyThird"></span></p>
     <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool we use to create it.</p>
     <p>First, we exclude any tools that would create a mortice that is too small or too large (less than 1/4 or greater than 1/2 of the material width):</p>
     <p>Applicable chisels or drills: <span data-name="applicableChisels"></span></p>
