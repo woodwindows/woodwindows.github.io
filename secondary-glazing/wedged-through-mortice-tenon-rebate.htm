@@ -163,7 +163,7 @@
         o.innerMorticeHeight = o.morticeHeight - 2 * o.wedgeHeight;
 
 
-        function drawMortice() {
+        function drawSide() {
             const boxMargin = o.materialWidth/4;
             const boxHeight = o.materialHeight + 2 * boxMargin;
             const boxWidth = o.materialWidth + 2 * boxMargin;
@@ -188,10 +188,10 @@
         `;
     }
 
-       function drawMortice2() {
+    function drawFront() {
             const boxMargin = o.materialWidth/4;
             const boxHeight = o.materialHeight + 2 * boxMargin;
-            const boxWidth = o.materialWidth + 2 * boxMargin;
+            const boxWidth = o.materialHeight + 2 * boxMargin;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
@@ -200,8 +200,8 @@
     .rail { fill: lightblue; }
     .rebate { stroke: red; stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
     .material { fill: rgba(105, 103, 236, 1.0); }
-    .mortice { fill: yellow; }
-    .mortice-inner { fill: wheat; }
+    .mortice { fill: yellow; stroke: white; stroke-width: 0.6; }
+    .mortice-inner2 { stroke: gray; stroke-width: 0.2; stroke-dasharray: 0.5 1.5 1 1.5; }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
@@ -209,14 +209,54 @@
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
 <polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
-<rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+<rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner2" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="0" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="${o.materialHeight - o.rebateHeight}" width="${boxWidth}" height="${o.rebateHeight}" class="rebate" />
 </svg>
         `;
     }
 
-    document.querySelector(`#diagrams`).innerHTML = drawMortice() + drawMortice2();
+    function drawTop() {
+            const boxMargin = o.materialWidth/4;
+            const boxHeight = o.materialWidth + 2 * boxMargin;
+            const boxWidth = o.materialWidth + 2 * boxMargin;
+
+            const h = o.materialWidth;
+            const w = o.materialWidth;
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
+<style>
+    .background { fill: pink; }
+    .stile { fill: lightblue; }
+    .rail { fill: lightblue; }
+    .tenon { stroke: white; stroke-width: 0.6; fill: wheat; }
+    .rebate { stroke: red; stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
+    .material { fill: rgba(105, 103, 236, 1.0); }
+    .mortice { fill: yellow; }
+    .mortice-inner { fill: wheat; }
+</style>
+<rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
+
+<rect x="0" y="${o.materialWidth - boxHeight}" width="${o.materialWidth}" height="${boxHeight}" class="rail" />
+
+<rect x="0" y="0" width="${o.materialWidth}" height="${o.materialWidth}" class="material" />
+
+<rect x="${o.morticeX1}" y="0" width="${o.morticeWidth}" height="${o.materialWidth}" class="mortice" />
+<polygon points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon"/>
+
+<rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialWidth - boxHeight}" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
+<rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
+</svg>
+        `;
+    }
+
+    document.querySelector(`#diagrams`).innerHTML = 
+    `<h3>Side</h3>` +
+    drawSide() +
+    `<h3>Front (mortice)</h3>` +
+    drawFront() +
+    `<h3>Top (tenon)</h3>` +
+    drawTop();
 
 //     <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
 // <rect x="0" y="${this.rebateDepthRemainder/2}" height="${this.rebateDepthRemainder/2}" width="${this.materialSashThickness}" class="tenon-piece" />
