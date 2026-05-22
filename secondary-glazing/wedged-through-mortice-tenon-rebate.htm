@@ -7,13 +7,23 @@
     <script type="module">
         const params = new URLSearchParams(document.location.search);
 
+        const getBool = (name) => {
+            const value = params.get(name) ?? undefined;
+            if (value === undefined) {
+                return undefined;
+            }
+            // Note that an empty value is treated as true
+            // so that useChisels as a param without a value works
+            return (["", "1", "yes", "true"].includes(value.trim().toLowerCase())) ? true : false;
+        };
+
         const getInt = (name) => {
             const value = params.get(name) ?? undefined;
             if (value === undefined) {
                 return undefined;
             }
             return parseInt(value, 10);
-        }
+        };
 
         const getFloat = (name) => {
             const value = params.get(name) ?? undefined;
@@ -21,7 +31,7 @@
                 return undefined;
             }
             return parseFloat(value);
-        }
+        };
 
         const getIntArray = (name) => {
             const value = params.get(name) ?? undefined;
@@ -72,28 +82,34 @@
         // Chisel or drill sizes in order from small to large
         o.chisels = [...new Set((getIntArray("chisels") ?? [8, 12, 6, 25]))].toSorted((a, b) => a - b);
 
+        o.useChisels = getBool("useChisels") ?? true;
+
+        // Make useChisels available to CSS
+        document.body.dataset.useChisels = o.useChisels;
+
         o.third = o.materialWidth/3;
 
         o.heavyThird = roundTo(o.third, o.roundTo);
 
         const heavyThird = o.heavyThird;
 
-        o.applicableChisels = o.chisels.filter(w => (o.materialWidth/4 <= w) && (w <= o.materialWidth/2));
-
         let best = undefined;
 
-        o.applicableChisels.find(w => {
-            if (w === heavyThird) {
-                best = w;
-                return best;
-            };
+        if (o.useChisels) {
+            o.applicableChisels = o.chisels.filter(w => (o.materialWidth/4 <= w) && (w <= o.materialWidth/2));
+            o.applicableChisels.find(w => {
+                if (w === heavyThird) {
+                    best = w;
+                    return best;
+                };
 
-            if (w < heavyThird) {
-                best = w;
-            } else {
-                return best;
-            }
-        });
+                if (w < heavyThird) {
+                    best = w;
+                } else {
+                    return best;
+                }
+            });
+        }
 
         o.availableThird = best ?? heavyThird;
 
@@ -219,6 +235,14 @@
         .focus {
             color: black;
         }
+
+        /*body[data-use-chisels='true'] .chisels-yes {
+
+        }*/
+
+        body[data-use-chisels='false'] .chisels-yes {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -232,6 +256,7 @@
     <p>Rebate: <span data-name="rebateWidth"></span> x <span data-name="rebateHeight"></span></p>
     <p>Round to: <span data-name="roundTo"></span></p>
     <p>Chisels: <span data-name="chisels"></span></p>
+    <p>Use chisels: <span data-name="useChisels"></span></p>
     <p>Straight fraction: <span data-name="straightFraction"></span></p>
     <p>Rebate snap: <span data-name="rebateSnap"></span></p>
     <p>Wedge height: <span data-name="wedgeHeight"></span></p>
@@ -255,12 +280,14 @@
     <p>Suggested width: <span data-name="third"></span></p>
     <p>Round to the specified unit (Round to: <span data-name="roundTo"></span>):</p>
     <p>Rounded width: <span data-name="heavyThird"></span></p>
+    <div class="chisels-yes">
     <p>We're going to create the mortice with a chisel or drill, so we'll adjust the width of the mortice to match the tool we use to create it.</p>
     <p>First, we exclude any tools that would create a mortice that is too small or too large (less than 1/4 or greater than 1/2 of the material width):</p>
     <p>Applicable chisels or drills: <span data-name="applicableChisels"></span></p>
     <p>Then we pick the best tool from the applicable tools:</p>
     <p>Tool that best matches <span data-name="heavyThird"></span> mm mortice: <span data-name="availableThird"></span></p>
     <p>Specifically, we use the largest chisel or drill that doesn't greatly exceed 1/3 of the material</p>
+    </div>
     <p>With this information, the mortice width is defined:
     <p>Mortice width: <span data-name="morticeWidth"></span></p>
     <p>The mortice will be normally be centred horizontally so the position naturally follows from the mortice width and material width:</p>
