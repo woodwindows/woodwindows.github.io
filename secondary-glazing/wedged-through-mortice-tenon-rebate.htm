@@ -253,8 +253,8 @@
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${o.materialWidth}" height="${boxHeight}" class="stile" />
 <rect x="0" y="0" width="${o.materialWidth}" height="${o.materialHeight}" class="material" />
-<rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />
-<rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="rail" />
+<rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice highlight" />
+<rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="rail highlight" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialHeight - o.rebateHeight}" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
 
@@ -287,7 +287,7 @@
 
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
-<polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
+<polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice highlight"/>
 <rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="0" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="${o.materialHeight - o.rebateHeight}" width="${boxWidth}" height="${o.rebateHeight}" class="rebate" />
@@ -322,7 +322,7 @@
 
 <rect x="0" y="0" width="${w}" height="${h}" class="material" />
 
-<polygon id="tenon" points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon rail"/>
+<polygon id="tenon" points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon rail highlight"/>
 
 <rect x="${w - o.rebateHeight}" y="${o.rebateHeight - boxHeight}" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${w - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
@@ -374,6 +374,7 @@
             --sunlight: #DFC774;
             --adventurer: #5D3A40;
             --cordoba: #493B3C;
+            --silent-white-pale: #FBFDF2;
 
             --bg: var(--yellow-pink);
             --mortice: var(--carys);
@@ -404,7 +405,7 @@
 
         .rebate { stroke: var(--cordoba); stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
 
-        .highlight { stroke: white; stroke-width: 0.6; }
+        .highlight { stroke: var(--silent-white-pale); stroke-width: 0.6; }
 
         .hidden {
             display: none;
