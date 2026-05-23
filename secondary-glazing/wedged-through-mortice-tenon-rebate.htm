@@ -250,32 +250,24 @@
             const remainderY = o.materialHeight - o.morticeY2;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
-<style>
-    .background { fill: pink; }
-    .stile { fill: lightblue; }
-    .rebate { stroke: red; stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
-    .material { fill: rgba(105, 103, 236, 1.0); }
-    .mortice { fill: yellow; }
-    .mortice-inner { fill: wheat; }
-</style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${o.materialWidth}" height="${boxHeight}" class="stile" />
 <rect x="0" y="0" width="${o.materialWidth}" height="${o.materialHeight}" class="material" />
 <rect x="${o.morticeX1}" y="${o.morticeY1}" width="${o.morticeWidth}" height="${o.morticeHeight}" class="mortice" />
-<rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="mortice-inner" />
+<rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="rail" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialHeight - o.rebateHeight}" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
 
-<text x="${o.morticeX1/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeX1}</text>
-<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeWidth}</text>
-<text x="${o.morticeX2 + (remainderX/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderX}</text>
+<text x="${o.morticeX1/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeX1}</text>
+<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeWidth}</text>
+<text x="${o.morticeX2 + (remainderX/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${remainderX}</text>
 
-<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeY1}</text>
-<text x="-8" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeHeight}</text>
-<text x="-8" y="${o.morticeY2 + (remainderY/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderY}</text>
+<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeY1}</text>
+<text x="-8" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeHeight}</text>
+<text x="-8" y="${o.morticeY2 + (remainderY/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${remainderY}</text>
 
-<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.wedgeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.wedgeHeight}</text>
-<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeHeight}</text>
+<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.wedgeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.wedgeHeight}</text>
+<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.innerMorticeHeight}</text>
 
 </svg>
         `;
@@ -288,13 +280,7 @@
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
-    .background { fill: pink; }
-    .stile { fill: lightblue; }
-    .rail { fill: wheat; }
-    .rebate { stroke: red; stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
-    .material { fill: rgba(105, 103, 236, 1.0); }
-    .mortice { fill: yellow; stroke: white; stroke-width: 0.6; }
-    .mortice-inner2 { stroke: gray; stroke-width: 0.2; stroke-dasharray: 0.5 1.5 1 1.5; }
+    .mortice-inner { stroke: gray; stroke-width: 0.2; stroke-dasharray: 0.5 1.5 1 1.5; }
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${boxHeight}" class="stile" />
@@ -302,18 +288,18 @@
 <rect x="0" y="0" width="${boxWidth}" height="${o.materialHeight}" class="rail" />
 <rect x="0" y="0" width="${o.materialHeight}" height="${o.materialHeight}" class="material" />
 <polygon points="0 ${o.morticeY1} ${o.neckX} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY1} ${o.materialHeight} ${o.innerMorticeY2} ${o.neckX} ${o.innerMorticeY2} 0 ${o.morticeY2}" class="mortice"/>
-<rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner2" />
+<rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="0" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="${o.materialHeight - o.rebateHeight}" width="${boxWidth}" height="${o.rebateHeight}" class="rebate" />
 
-<text x="${o.neckX/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.neckX}</text>
-<text x="${o.neckX + o.neckDepth/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.neckDepth}</text>
+<text x="${o.neckX/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.neckX}</text>
+<text x="${o.neckX + o.neckDepth/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.neckDepth}</text>
 
-<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeY1}</text>
-<text x="-8" y="${o.morticeY1 + o.morticeHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeHeight}</text>
+<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeY1}</text>
+<text x="-8" y="${o.morticeY1 + o.morticeHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeHeight}</text>
 
-<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeY1}</text>
-<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1 + (o.innerMorticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeHeight}</text>
+<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.innerMorticeY1}</text>
+<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1 + (o.innerMorticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.innerMorticeHeight}</text>
 </svg>
         `;
     }
@@ -332,31 +318,21 @@
             const rem = h - o.rebateHeight;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
-<style>
-    .background { fill: pink; }
-    .stile { fill: lightblue; }
-    .rail { fill: wheat; }
-    .tenon { stroke: white; stroke-width: 0.6; fill: wheat; }
-    .rebate { stroke: red; stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
-    .material { fill: rgba(105, 103, 236, 1.0); }
-    .mortice { fill: yellow; }
-    .mortice-inner { fill: wheat; }
-</style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 
 <rect x="0" y="0" width="${w}" height="${h}" class="material" />
 
-<polygon id="tenon" points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon"/>
+<polygon id="tenon" points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon rail"/>
 
 <rect x="${w - o.rebateHeight}" y="${o.rebateHeight - boxHeight}" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${w - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
 
-<text x="${o.morticeX1/2}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeX1}</text>
-<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeWidth}</text>
-<text x="${o.morticeX2 + (remainderX/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderX}</text>
+<text x="${o.morticeX1/2}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeX1}</text>
+<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.morticeWidth}</text>
+<text x="${o.morticeX2 + (remainderX/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${remainderX}</text>
 
-<text x="${w + 8}" y="${o.rebateHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.rebateHeight}</text>
-<text x="${w + 8}" y="${o.rebateHeight + rem/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${rem}</text>
+<text x="${w + 8}" y="${o.rebateHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${o.rebateHeight}</text>
+<text x="${w + 8}" y="${o.rebateHeight + rem/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="6">${rem}</text>
 </svg>
         `;
     }
@@ -390,6 +366,46 @@
         }
     </script>
     <style>
+        :root {
+            --carys: #FFE57B;
+            --yellow-pink: #D0A946;
+            --woad: #436382;
+            --jewel-beetle: #566038;
+            --sunlight: #DFC774;
+            --adventurer: #5D3A40;
+            --cordoba: #493B3C;
+
+            --bg: var(--yellow-pink);
+            --mortice: var(--carys);
+            --rail: var(--jewel-beetle);
+            --stile: var(--adventurer);
+            --material: var(--woad);
+        }
+
+        .background {
+            fill: var(--bg);
+        }
+
+        .mortice {
+            fill: var(--mortice);
+        }
+
+        .rail {
+            fill: var(--rail);
+        }
+
+        .stile {
+            fill: var(--stile);
+        }
+
+        .material {
+            fill: var(--material);
+        }
+
+        .rebate { stroke: var(--cordoba); stroke-width: 0.2; stroke-dasharray: 0.5 1.5; }
+
+        .highlight { stroke: white; stroke-width: 0.6; }
+
         .hidden {
             display: none;
         }
