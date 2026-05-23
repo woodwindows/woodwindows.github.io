@@ -147,13 +147,14 @@
 
         o.morticeOverlapsRebateX = (o.morticeX1 <= o.rebateX) && (o.rebateX < o.morticeX2);
 
-        let neckInset = Math.ceil(o.straightFraction * o.materialHeight);
+        let neckDepth = Math.ceil(o.straightFraction * o.materialHeight);
 
-        if (o.morticeOverlapsRebateX && neckInset < o.rebateHeight) {
-            neckInset = o.rebateHeight;
+        if (o.morticeOverlapsRebateX && neckDepth < o.rebateHeight) {
+            neckDepth = o.rebateHeight;
         }
 
-        o.neckX = o.materialHeight - neckInset;
+        o.neckDepth = neckDepth;
+        o.neckX = o.materialHeight - neckDepth;
 
         o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), (o.shoulderHeight - o.wedgeHeight));
 
@@ -168,11 +169,85 @@
         o.innerMorticeY2 = o.morticeY2 - o.wedgeHeight;
         o.innerMorticeHeight = o.morticeHeight - 2 * o.wedgeHeight;
 
+        function getHWLabels(p1, p2, bbox, offset) {
+            // // Get the center of the bbox
+            // const centerBB = { x: bbox.x + bbox.width/2, y: bbox.y + bbox.height/2 };
+            
+            // function isAbove(p) {
+            //     return p.x <= centerBB.x;
+            // }
+
+            // function isBelow(p) {
+            //     return p.x > centerBB.x;
+            // }
+
+            // function isLeft(p) {
+            //     return p.y <= centerBB.y;
+            // }
+
+            // function isRight(p) {
+            //     return p.y > centerBB.y;
+            // }
+
+            // // We'll default to putting the labels above and to the left of the points
+            // // unless the points are both below or both to the right of the bbox center
+            // const showBelowW = isBelow(p1) && isBelow(p2);
+            // const showRightH = isRight(p1) && isRight(p2);
+
+            // const x = showRightH ? bbox.x + bbox.width + offset : bbox.x - offset;
+            // const y = showBelowW ? bbox.y + bbox.height + offset : bbox.y - offset;
+
+            const rect = {
+                x: Math.min(p1.x, p2.x),
+                y: Math.min(p1.y, p2.y),
+                width: Math.abs(p1.x - p2.x),
+                height: Math.abs(p1.y - p2.y)
+            };
+
+            const center = { x: rect.x + rect.width/2, y: rect.y + rect.height/2 };
+
+            return [
+                { type: "width", x: center.x, value: rect.width, p1, p2, center, rect },
+                { type: "height", y: center.y, value: rect.height, p1, p2, center, rect },
+            ].filter(x => x.value !== 0);
+
+            // return `
+            // <text x="${center.x}" y="${y}" dominant-baseline="middle" text-anchor="middle">${width}</text>
+            // <text x="${x}" y="${center.y}" dominant-baseline="middle" text-anchor="middle">${height}</text>
+            // `;
+        }
+
+        function isPointInRect(p, rect) {
+            if (p.x < rect.x || (rect.x + rect.width) < p.x || p.y < rect.y || (rect.y + rect.height) < p.y) {
+                return false;
+            }
+            return true;
+        }
+
+        function getPolygonLabels(polygon) {
+            const svg = polygon.viewportElement;
+            const viewBox = svg.viewBox.baseVal;
+            const bbox = polygon.getBBox();
+            const viewablePoints = [...polygon.points].filter(p => isPointInRect(p, viewBox));
+            
+            let previous = viewablePoints[viewablePoints.length - 1];
+
+            for (const p of viewablePoints) {
+                if (previous) {
+                    const labels = getHWLabels(previous, p, bbox, 10);
+                    console.log(labels);
+                }
+                previous = p;
+            }
+        }
 
         function drawSide() {
             const boxMargin = o.materialWidth/4;
             const boxHeight = o.materialHeight + 2 * boxMargin;
             const boxWidth = o.materialWidth + 2 * boxMargin;
+
+            const remainderX = o.materialWidth - o.morticeX2;
+            const remainderY = o.materialHeight - o.morticeY2;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
@@ -190,6 +265,18 @@
 <rect x="${o.morticeX1}" y="${o.innerMorticeY1}" width="${o.morticeWidth}" height="${o.innerMorticeHeight}" class="mortice-inner" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialHeight - o.rebateHeight}" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
+
+<text x="${o.morticeX1/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeX1}</text>
+<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeWidth}</text>
+<text x="${o.morticeX2 + (remainderX/2)}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderX}</text>
+
+<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeY1}</text>
+<text x="-8" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeHeight}</text>
+<text x="-8" y="${o.morticeY2 + (remainderY/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderY}</text>
+
+<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.wedgeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.wedgeHeight}</text>
+<text x="${o.materialWidth + 8}" y="${o.morticeY1 + (o.morticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeHeight}</text>
+
 </svg>
         `;
     }
@@ -218,17 +305,31 @@
 <rect x="0" y="${o.innerMorticeY1}" width="${o.materialHeight}" height="${o.innerMorticeHeight}" class="mortice-inner2" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="0" width="${o.rebateHeight}" height="${boxHeight}" class="rebate" />
 <rect x="${o.materialHeight - o.rebateHeight}" y="${o.materialHeight - o.rebateHeight}" width="${boxWidth}" height="${o.rebateHeight}" class="rebate" />
+
+<text x="${o.neckX/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.neckX}</text>
+<text x="${o.neckX + o.neckDepth/2}" y="-4" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.neckDepth}</text>
+
+<text x="-8" y="${o.morticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeY1}</text>
+<text x="-8" y="${o.morticeY1 + o.morticeHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeHeight}</text>
+
+<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeY1}</text>
+<text x="${o.materialHeight + 8}" y="${o.innerMorticeY1 + (o.innerMorticeHeight/2)}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.innerMorticeHeight}</text>
 </svg>
         `;
     }
 
     function drawTop() {
-            const boxMargin = o.materialWidth/4;
-            const boxHeight = o.materialWidth + 2 * boxMargin;
-            const boxWidth = o.materialWidth + 2 * boxMargin;
-
-            const h = o.materialWidth;
+            const h = o.materialHeight;
             const w = o.materialWidth;
+
+            const boxMargin = o.materialWidth/4;
+
+            const boxHeight = h + 2 * boxMargin;
+            const boxWidth = w + 2 * boxMargin;
+
+            const remainderX = o.materialWidth - o.morticeX2;
+
+            const rem = h - o.rebateHeight;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-${boxMargin} -${boxMargin} ${boxWidth} ${boxHeight}" preserveAspectRatio="yes" fill="none">
 <style>
@@ -243,15 +344,19 @@
 </style>
 <rect x="-${boxMargin}" y="-${boxMargin}" width="${boxWidth}" height="${boxHeight}" class="background" />
 
-<rect x="0" y="${o.materialWidth - boxHeight}" width="${o.materialWidth}" height="${boxHeight}" class="rail" />
+<rect x="0" y="0" width="${w}" height="${h}" class="material" />
 
-<rect x="0" y="0" width="${o.materialWidth}" height="${o.materialWidth}" class="material" />
+<polygon id="tenon" points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon"/>
 
-<rect x="${o.morticeX1}" y="0" width="${o.morticeWidth}" height="${o.materialWidth}" class="mortice" />
-<polygon points="0 0 ${o.morticeX1} 0 ${o.morticeX1} ${h} ${o.morticeX2} ${h} ${o.morticeX2} ${o.rebateHeight} ${w} ${o.rebateHeight} ${w} 0 ${w} ${-boxHeight} 0 ${-boxHeight}" class="tenon"/>
+<rect x="${w - o.rebateWidth}" y="${h - boxHeight}" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
+<rect x="${w - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
 
-<rect x="${o.materialWidth - o.rebateWidth}" y="${o.materialWidth - boxHeight}" width="${o.rebateWidth}" height="${boxHeight}" class="rebate" />
-<rect x="${o.materialWidth - o.rebateWidth}" y="0" width="${o.rebateWidth}" height="${o.rebateHeight}" class="rebate" />
+<text x="${o.morticeX1/2}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeX1}</text>
+<text x="${o.morticeX1 + (o.morticeWidth/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.morticeWidth}</text>
+<text x="${o.morticeX2 + (remainderX/2)}" y="${h + 8}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${remainderX}</text>
+
+<text x="${w + 8}" y="${o.rebateHeight/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${o.rebateHeight}</text>
+<text x="${w + 8}" y="${o.rebateHeight + rem/2}" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="8">${rem}</text>
 </svg>
         `;
     }
@@ -263,6 +368,10 @@
     drawFront() +
     `<h3>Top (tenon)</h3>` +
     drawTop();
+
+
+    const t = document.querySelector("#tenon");
+    getPolygonLabels(t);
 
 //     <rect x="0" y="0" width="${this.materialSashThickness}" height="${this.materialSashThickness}" class="mortice-piece" />
 // <rect x="0" y="${this.rebateDepthRemainder/2}" height="${this.rebateDepthRemainder/2}" width="${this.materialSashThickness}" class="tenon-piece" />
