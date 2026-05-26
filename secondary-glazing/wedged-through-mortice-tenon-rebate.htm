@@ -169,6 +169,14 @@
         o.innerMorticeY2 = o.morticeY2 - o.wedgeHeight;
         o.innerMorticeHeight = o.morticeHeight - 2 * o.wedgeHeight;
 
+
+        /// DISTANCE ///
+
+        o.stileLength = getInt("stileLength") ?? 1013;
+        o.stileMorticeDistance = o.stileLength - (o.morticeY1 * 2);
+        o.stileInnerMorticeDistance = o.stileLength - (o.innerMorticeY1 * 2);
+
+
         function getHWLabels(p1, p2, bbox, offset) {
             // // Get the center of the bbox
             // const centerBB = { x: bbox.x + bbox.width/2, y: bbox.y + bbox.height/2 };
@@ -454,6 +462,8 @@
     <p>Shoulder height: <span data-name="shoulderHeight"></span></p>
     <p>End fraction: <span data-name="endFraction"></span></p>
     <p>End minimum: <span data-name="endMinimum"></span></p>
+    <p></p>
+    <p>Stile length: <span data-name="stileLength"></span></p>
     
 
     <div id="diagrams" style="width:25%">
@@ -530,6 +540,11 @@
     <p>Outer Mortice y1: <span data-name="morticeY1"></span></p>
     <p>Outer Mortice y2: <span data-name="morticeY2"></span></p>
     <p>Outer Mortice height: <span data-name="morticeHeight"></span></p>
+
+<h2>Distances</h2>
+<p>On a stile that is <span data-name="stileLength"></span> mm, the distances between the furthest edges of the mortices at each end are:</p>
+<p>Stile mortice distance: <span data-name="stileMorticeDistance"></span></p>
+<p>Stile inner mortice distance: <span data-name="stileInnerMorticeDistance"></span></p>
 
     <h2>Description</h2>
     <p>
