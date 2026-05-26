@@ -211,6 +211,10 @@
         const measurementsElement = document.querySelector("#measurements");
         measurementsElement.addEventListener("change", () => calculate());
 
+        const morticeLinks = [...document.querySelectorAll(`.mortice-link`)];
+        for (const morticeLink of morticeLinks) {
+            morticeLink.href = `wedged-through-mortice-tenon-rebate.htm?stileLength=${w.sashHeight}`;
+        }
         calculate();
     </script>
 </head>
@@ -265,7 +269,7 @@
     <p>If you find that the locations are significantly out, you may not have a symmetrical set of existing windows and you might consider whether a symmetrical set of internal glazing will work for your particular situation. This tool can only produce measurements for symmetrical internal glazing.</p>
 
     <h2>Secondary Glazing</h2>
-    
+    <p><a href="wedged-through-mortice-tenon-rebate.htm" class="mortice-link">Mortice Diagrams</a></p>
     <h3 id="parts">Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
     <div id="secondary-parts-list"></div>
