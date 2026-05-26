@@ -159,11 +159,12 @@
             const imageContainerElement2 = document.querySelector(`#secondary-glazing-liner-image`);
             imageContainerElement2.innerHTML = w.drawLinerHorizontal();
 
-            const imageContainerElement3 = document.querySelector(`#secondary-glazing-tenon-image`);
-            imageContainerElement3.innerHTML = w.drawTenon();
+            // Old diagrams showing bridle joint
+            // const imageContainerElement3 = document.querySelector(`#secondary-glazing-tenon-image`);
+            // imageContainerElement3.innerHTML = w.drawTenon();
 
-            const imageContainerElement4 = document.querySelector(`#secondary-glazing-mortice-image`);
-            imageContainerElement4.innerHTML = w.drawMortice();
+            // const imageContainerElement4 = document.querySelector(`#secondary-glazing-mortice-image`);
+            // imageContainerElement4.innerHTML = w.drawMortice();
 
             const partsElement = document.querySelector("#secondary-parts-list");
             partsElement.innerHTML = w.parts.map(part => `<div class="part">
@@ -269,7 +270,9 @@
     <p>If you find that the locations are significantly out, you may not have a symmetrical set of existing windows and you might consider whether a symmetrical set of internal glazing will work for your particular situation. This tool can only produce measurements for symmetrical internal glazing.</p>
 
     <h2>Secondary Glazing</h2>
+    
     <p><a href="wedged-through-mortice-tenon-rebate.htm" class="mortice-link">Mortice Diagrams</a></p>
+
     <h3 id="parts">Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
     <div id="secondary-parts-list"></div>
@@ -300,10 +303,13 @@
     <div id="secondary-glazing-image"></div>
     <p>This shows the plan view of the bottom liner and the positions for the jambs and mullions:</p>
     <div id="secondary-glazing-liner-image"></div>
-    <p>This shows the side view of the tenon:</p>
+    <p><a href="wedged-through-mortice-tenon-rebate.htm" class="mortice-link">Mortice Diagrams</a></p>
+    
+    <!-- The diagrams below - no longer used - show a bridle joint -->
+    <!--<p>This shows the side view of the tenon:</p>
     <div id="secondary-glazing-tenon-image"></div>
     <p>This shows the top view of the mortice:</p>
-    <div id="secondary-glazing-mortice-image"></div>
+    <div id="secondary-glazing-mortice-image"></div>-->
     
     <h3>Data</h3>
     <p>Here's a dump of the data for your secondary glazing including a parts list:</p>
