@@ -832,6 +832,7 @@ ${drawJambs()}
             { count: screenedCasementCount, name: "Screen Stop (Vertical)", dimensions: [this.materialStopShort, this.materialStopLong, this.screenStopVertical] },
             { count: screenedCasementCount, name: "Screen (Horizontal)", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenWidth] },
             { count: screenedCasementCount, name: "Screen (Vertical)", dimensions: [this.materialScreenShort, this.materialScreenLong, this.screenHeight] },
+            { count: casementCount * 4, name: "Peg or dowel" },
             { count: casementCount, name: "Glass", dimensions: [this.glassWidth, this.glassHeight, this.materialGlassThickness] },
             { count, name: "Hinge" },
             { count: casementCount, name: "Fastener" },
