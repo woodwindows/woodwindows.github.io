@@ -125,7 +125,8 @@
 
         o.availableThird = best ?? heavyThird;
 
-        o.morticeWidth = o.availableThird;
+        o.morticeWidth = getInt("morticeWidth") ?? o.availableThird;
+
         o.morticeX1Centre = Math.floor((o.materialWidth - o.morticeWidth)/2);
         o.morticeX2Centre = o.morticeX1Centre + o.morticeWidth;
 
@@ -156,12 +157,18 @@
         o.neckDepth = neckDepth;
         o.neckX = o.materialHeight - neckDepth;
 
-        o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight* o.endFraction), (o.shoulderHeight - o.wedgeHeight));
+        o.morticeY1 = Math.max(o.endMinimum, Math.floor(o.materialHeight * o.endFraction), (o.shoulderHeight - o.wedgeHeight));
 
         o.tenonBottomMax = o.morticeOverlapsRebateX ? o.rebateY : o.materialHeight;
         o.tenonBottomMaxAfterShoulder = o.tenonBottomMax - o.shoulderHeight;
 
-        o.morticeY2 = o.tenonBottomMaxAfterShoulder + o.wedgeHeight;
+        o.tenonBottomMaxSnapped = o.tenonBottomMaxAfterShoulder;
+        const distToRebateY = o.tenonBottomMaxAfterShoulder - o.rebateY;
+        if (Math.abs(distToRebateY) <= o.rebateSnap) {
+            o.tenonBottomMaxSnapped = o.rebateY;
+        }
+
+        o.morticeY2 = o.tenonBottomMaxSnapped + o.wedgeHeight;
 
         o.morticeHeight = o.morticeY2 - o.morticeY1;
 
@@ -524,6 +531,8 @@
     <p>Tenon bottom maximum: <span data-name="tenonBottomMax"></span></p>
     <p>With a shoulder defined on the tenon, the position of the mortice can't extend quite as far. The shoulder is <span data-name="shoulderHeight"></span> mm:</p>
     <p>Tenon bottom maximum: <span data-name="tenonBottomMaxAfterShoulder"></span></p>
+    <p>If the tenon bottom is close to the rebate, we snap it to the rebate position:</p>
+    <p>Tenon bottom snapped: <span data-name="tenonBottomMaxSnapped"></span></p>
     <p>The outer mortice needs space for the wedge so its bottom can be lower by the wedge height (<span data-name="wedgeHeight"></span> mm):</p>
     <p>Mortice y2: <span data-name="morticeY2"></span></p>
     <p>The position of the top of the outer mortice is determined as a small fraction of the material height (End fraction = <span data-name="endFraction"></span>) but importantly limited by the need to preserve enough material strength at the top of the mortice 

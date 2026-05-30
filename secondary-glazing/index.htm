@@ -214,7 +214,7 @@
 
         const morticeLinks = [...document.querySelectorAll(`.mortice-link`)];
         for (const morticeLink of morticeLinks) {
-            morticeLink.href = `wedged-through-mortice-tenon-rebate.htm?roundTo=2&useChisels=false&stileLength=${w.sashHeight}&materialWidth=${w.materialSashThickness}&materialHeight=${w.materialSashThickness}&rebateWidth=${w.rebateDepth}&rebateHeight=${w.rebateHeight}#diagrams`;
+            morticeLink.href = `wedged-through-mortice-tenon-rebate.htm?roundTo=2&rebateSnap=5&useChisels=false&stileLength=${w.sashHeight}&materialWidth=${w.materialSashThickness}&materialHeight=${w.materialSashThickness}&rebateWidth=${w.rebateDepth}&rebateHeight=${w.rebateHeight}#diagrams`;
         }
         calculate();
     </script>
