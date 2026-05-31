@@ -213,9 +213,14 @@
         measurementsElement.addEventListener("change", () => calculate());
 
         const morticeLinks = [...document.querySelectorAll(`.mortice-link`)];
-        const mwParam = (w.materialSashThickness === 44) ? `morticeWidth=12&` : ``;
+        const mwParam = (w.materialSashThickness === 44) ? `morticeWidth=12` : ``;
         for (const morticeLink of morticeLinks) {
             morticeLink.href = `wedged-through-mortice-tenon-rebate.htm?${mwParam}&roundTo=2&rebateSnap=5&useChisels=false&stileLength=${w.sashHeight}&materialWidth=${w.materialSashThickness}&materialHeight=${w.materialSashThickness}&rebateWidth=${w.rebateDepth}&rebateHeight=${w.rebateHeight}#diagrams`;
+        }
+
+        const freeMorticeLinks = [...document.querySelectorAll(`.free-mortice-link`)];
+        for (const morticeLink of freeMorticeLinks) {
+            morticeLink.href = `wedged-through-mortice-tenon-rebate.htm?roundTo=2&useChisels=false&stileLength=${w.sashHeight}&materialWidth=${w.materialSashThickness}&materialHeight=${w.materialSashThickness}&rebateWidth=${w.rebateDepth}&rebateHeight=${w.rebateHeight}#diagrams`;
         }
         calculate();
     </script>
@@ -272,7 +277,8 @@
 
     <h2>Secondary Glazing</h2>
     
-    <p><a href="wedged-through-mortice-tenon-rebate.htm" class="mortice-link">Mortice Diagrams</a></p>
+    <p><a href="wedged-through-mortice-tenon-rebate.htm" class="mortice-link">Rebate-aligned Mortice Diagrams</a></p>
+    <p><a href="wedged-through-mortice-tenon-rebate.htm" class="free-mortice-link">Free Mortice Diagrams</a></p>
 
     <h3 id="parts">Parts List</h3>
     <p>Here are the parts you will need for your secondary glazing:</p>
