@@ -19,7 +19,13 @@
             --background: var(--yellow-pink);
             --rail: var(--jewel-beetle);
             --stile: var(--adventurer);
-            --mortice: black;
+            --mortice: var(--carys);
+            --delimiter: var(--woad);
+        }
+
+        text {
+            dominant-baseline: middle;
+            text-anchor: middle;
         }
 
         .background {
@@ -36,6 +42,10 @@
 
         .mortice {
             fill: var(--mortice);
+        }
+
+        .delimiter {
+            fill: var(--delimiter);
         }
 
         .aside {
@@ -100,8 +110,17 @@
         <rect class="mortice" x="0", y="3" width="6" height="4"></rect>
         <rect class="mortice" x="0", y="41" width="6" height="4"></rect>
 
+        <rect class="delimiter" x="-6", y="7" width="4" height="0.5"></rect>
+        <rect class="delimiter" x="-6", y="40.5" width="4" height="0.5"></rect>
+
         <rect class="rail" x="12" y="2" width="24" height="6"></rect>
         <rect class="rail" x="8" y="3" width="32" height="4"></rect>
+
+        <rect class="delimiter" y="-3", x="12" height="3" width="0.5"></rect>
+        <rect class="delimiter" y="-3", x="35.5" height="3" width="0.5"></rect>
+
+        <text x="24" y="-1.5" fill="black" font-size="4">shoulders</text>
+        <text x="0" y="0" fill="black" font-size="4" transform="rotate(-90) translate(-24, -4)">mortices</text>
 
     </svg>
     </div>
