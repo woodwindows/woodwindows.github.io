@@ -19,6 +19,7 @@
             --background: var(--yellow-pink);
             --rail: var(--jewel-beetle);
             --stile: var(--adventurer);
+            --mortice: black;
         }
 
         .background {
@@ -34,11 +35,15 @@
         }
 
         .mortice {
-            fill: black;
+            fill: var(--mortice);
         }
 
         .aside {
             font-style: italic;
+        }
+
+        .term {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -70,13 +75,15 @@
 
     <p>First, we need to recognize which features of the casement determine the size of the glass.</p>
 
-    <p>Vertically, the size is determined by the distance between the bottom-to-top (interior) distance between the
+    <p>Vertically, the size is determined by the distance between the interior distance (bottom-to-top) between the
         mortices on the stile.</p>
+        <p>I call this the <span class="term">interior mortice distance</span></p>
     <p class="aside">In some designs, it's also determined by the offset between the glazing rebate and the tenon,
         but I'm using a design where the tenon and rebate edges are at the same position so there is no offset and no
         distinction between tenon and rebate.</p>
 
     <p>Horizontally, the size is determined by the distance between the tenon shoulders at each end of the rail.</p>
+    <p>I call this the <span class="term">exterior shoulder distance</span></p>
     <p class="aside">This design has two shoulders at each end of the rail at different positions. We're talking about
         the shoulder that is closer to the end of the rail and the distance between these
         at either end of the rail. The position of the inner shoulder is only a consequence of the depth of the rebate
@@ -90,11 +97,11 @@
         <rect x="-8" y="-8" width="66" height="66" class="background"></rect>
 
         <rect class="stile" x="0", y="0" width="6" height="48"></rect>
-        <rect class="mortice" x="0", y="7" width="6" height="4"></rect>
+        <rect class="mortice" x="0", y="3" width="6" height="4"></rect>
         <rect class="mortice" x="0", y="41" width="6" height="4"></rect>
 
-        <rect class="rail" x="12" y="6" width="24" height="6"></rect>
-        <rect class="rail" x="8" y="7" width="32" height="4"></rect>
+        <rect class="rail" x="12" y="2" width="24" height="6"></rect>
+        <rect class="rail" x="8" y="3" width="32" height="4"></rect>
 
     </svg>
     </div>
