@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inside Out Window</title>
+    <style>
+        :root {
+            --carys: #FFE57B;
+            --yellow-pink: #D0A946;
+            --woad: #436382;
+            --jewel-beetle: #566038;
+            --sunlight: #DFC774;
+            --adventurer: #5D3A40;
+            --cordoba: #493B3C;
+            --silent-white-pale: #FBFDF2;
+
+            --background: var(--yellow-pink);
+            --rail: var(--jewel-beetle);
+            --stile: var(--adventurer);
+        }
+
+        .background {
+            fill: var(--background);
+        }
+
+        .stile {
+            fill: var(--stile);
+        }
+
+        .rail {
+            fill: var(--rail);
+        }
+
+        .mortice {
+            fill: black;
+        }
+
+        .aside {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>The Inside Out Window</h1>
+
+    <p>When constructing a casement sash, you have the choice of prioritizing a particular set of dimensions.
+        You can either concentrate on getting the exterior of the window to be your target size
+        or you can prioritize getting the interior of the window to match your target size.</p>
+    <p>
+        Obviously, if everything is measured to high accuracy, material is correctly sized, everything is cut square,
+        and there are no mistakes,
+        this prioritization does not matter and the window you produce with either philosophy will be exactly the same.
+        But life isn't perfect, and prioritizing everything is prioritizing nothing, so decide which is more important:
+    </p>
+    <ol>
+        <li>
+            the exterior of the casement (perhaps you need to match an opening in an existing frame) or
+        </li>
+        <li>
+            the interior of the casement (perhaps you are constrained by already having toughened glass ordered to spec
+            dimensions)
+        </li>
+    </ol>
+
+    <p>I've chosen to prioritize the interior measurements for a consistent glass size and I call this "The Inside Out
+        Window"</p>
+
+    <p>First, we need to recognize which features of the casement determine the size of the glass.</p>
+
+    <p>Vertically, the size is determined by the distance between the bottom-to-top (interior) distance between the
+        mortices on the stile.</p>
+    <p class="aside">In some designs, it's also determined by the offset between the glazing rebate and the tenon,
+        but I'm using a design where the tenon and rebate edges are at the same position so there is no offset and no
+        distinction between tenon and rebate.</p>
+
+    <p>Horizontally, the size is determined by the distance between the tenon shoulders at each end of the rail.</p>
+    <p class="aside">This design has two shoulders at each end of the rail at different positions. We're talking about
+        the shoulder that is closer to the end of the rail and the distance between these
+        at either end of the rail. The position of the inner shoulder is only a consequence of the depth of the rebate
+        and should be viewed as subordinate, not as a primary landmark.
+        The shoulder that counts is the one that you can see on the room-side, front face of the casement, not the one
+        you can see from the world-side, back face of the casement.</p>
+
+    <div id="diagrams" style="width: 25%;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 66 66" preserveAspectRatio="yes" fill="none">
+
+        <rect x="-8" y="-8" width="66" height="66" class="background"></rect>
+
+        <rect class="stile" x="0", y="0" width="6" height="48"></rect>
+        <rect class="mortice" x="0", y="7" width="6" height="4"></rect>
+        <rect class="mortice" x="0", y="41" width="6" height="4"></rect>
+
+        <rect class="rail" x="12" y="6" width="24" height="6"></rect>
+        <rect class="rail" x="8" y="7" width="32" height="4"></rect>
+
+    </svg>
+    </div>
+
+</body>
+
+</html>
