@@ -66,8 +66,8 @@
         or you can prioritize getting the interior of the window to match your target size.</p>
     <p>
         Obviously, if everything is measured to high accuracy, material is correctly sized, everything is cut square,
-        and there are no mistakes,
-        this prioritization does not matter and the window you produce with either philosophy will be exactly the same.
+        and there are no mistakes, this prioritization does not matter and the window you produce with either philosophy
+        will be exactly the same.
         But life isn't perfect, and prioritizing everything is prioritizing nothing, so decide which is more important:
     </p>
     <ol>
@@ -80,50 +80,61 @@
         </li>
     </ol>
 
-    <p>I've chosen to prioritize the interior measurements for a consistent glass size and I call this "The Inside Out
-        Window"</p>
+    <p>I've chosen to prioritize the interior measurements for a consistent glass size: <span class="term">The Inside Out
+        Window</span></p>
 
-    <p>First, we need to recognize which features of the casement determine the size of the glass.</p>
+    <h2>Distances</h2>
+    
+    <p>The interior size of the window is determined by 2 distances: the <span class="term">mortice distance</span>
+        and the <span class="term">shoulder distance</span>.</p>
 
-    <p>Vertically, the size is determined by the distance between the interior distance (bottom-to-top) between the
-        mortices on the stile.</p>
-        <p>I call this the <span class="term">interior mortice distance</span></p>
-    <p class="aside">In some designs, it's also determined by the offset between the glazing rebate and the tenon,
+    <!-- <p class="aside">In some designs, it's also determined by the offset between the glazing rebate and the tenon,
         but I'm using a design where the tenon and rebate edges are at the same position so there is no offset and no
-        distinction between tenon and rebate.</p>
+        distinction between tenon and rebate.</p> -->
 
-    <p>Horizontally, the size is determined by the distance between the tenon shoulders at each end of the rail.</p>
-    <p>I call this the <span class="term">exterior shoulder distance</span></p>
-    <p class="aside">This design has two shoulders at each end of the rail at different positions. We're talking about
-        the shoulder that is closer to the end of the rail and the distance between these
-        at either end of the rail. The position of the inner shoulder is only a consequence of the depth of the rebate
+    <div id="diagrams" style="width: 25%;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 66 66" preserveAspectRatio="yes" fill="none">
+
+            <rect x="-12" y="-12" width="66" height="66" class="background"></rect>
+
+            <rect class="stile" x="0" , y="0" width="6" height="48"></rect>
+            <rect class="mortice" x="0" , y="3" width="6" height="4"></rect>
+            <rect class="mortice" x="0" , y="41" width="6" height="4"></rect>
+
+            <rect class="delimiter" x="-6" , y="7" width="4" height="0.5"></rect>
+            <rect class="delimiter" x="-6" , y="40.5" width="4" height="0.5"></rect>
+
+            <rect class="rail" x="12" y="2" width="24" height="6"></rect>
+            <rect class="rail" x="8" y="3" width="32" height="4"></rect>
+
+            <rect class="delimiter" y="-3" , x="12" height="3" width="0.5"></rect>
+            <rect class="delimiter" y="-3" , x="35.5" height="3" width="0.5"></rect>
+
+            <text x="24" y="-6" fill="black" font-size="4">
+                <tspan>shoulder</tspan>
+                <tspan x="24" dy="1.2em">distance</tspan>
+            </text>
+            <text x="0" y="0" fill="black" font-size="4" transform="rotate(-90) translate(-24, -4)">
+                <tspan>mortice</tspan>
+                <tspan>distance</tspan>
+            </text>
+        </svg>
+</div>
+
+        <p>The mortice distance is the interior distance between the mortices in the stile.</p>
+        <p>The shoulder distance is the distance between the shoulders of the rail.</p>
+    
+        <p class="aside">The window design that I'm using actually has two shoulders at each end of the rail at different positions. When talking about
+        the shoulder distance, I'm referring to the shoulders that are closer to the end of the rail.
+        The position of the inner shoulder is only a consequence of the depth of the rebate
         and should be viewed as subordinate, not as a primary landmark.
         The shoulder that counts is the one that you can see on the room-side, front face of the casement, not the one
         you can see from the world-side, back face of the casement.</p>
 
-    <div id="diagrams" style="width: 25%;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 66 66" preserveAspectRatio="yes" fill="none">
+        <h2>Face & Edge</h2>
 
-        <rect x="-8" y="-8" width="66" height="66" class="background"></rect>
-
-        <rect class="stile" x="0", y="0" width="6" height="48"></rect>
-        <rect class="mortice" x="0", y="3" width="6" height="4"></rect>
-        <rect class="mortice" x="0", y="41" width="6" height="4"></rect>
-
-        <rect class="delimiter" x="-6", y="7" width="4" height="0.5"></rect>
-        <rect class="delimiter" x="-6", y="40.5" width="4" height="0.5"></rect>
-
-        <rect class="rail" x="12" y="2" width="24" height="6"></rect>
-        <rect class="rail" x="8" y="3" width="32" height="4"></rect>
-
-        <rect class="delimiter" y="-3", x="12" height="3" width="0.5"></rect>
-        <rect class="delimiter" y="-3", x="35.5" height="3" width="0.5"></rect>
-
-        <text x="24" y="-1.5" fill="black" font-size="4">shoulders</text>
-        <text x="0" y="0" fill="black" font-size="4" transform="rotate(-90) translate(-24, -4)">mortices</text>
-
-    </svg>
-    </div>
+        <p>The face of our window - the first surface we use for measurements - is the room side surface of the window - the side that is on display when the window is in its normal, closed position.</p>
+        <p>The edge of the window - the second surface we use for measurements - is the interior edge of the stiles and rails.</p>
 
 </body>
 
